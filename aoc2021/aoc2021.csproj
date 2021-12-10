@@ -14,12 +14,18 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Day01\data.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Day01\testdata.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="Day01Part1\data.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Day01Part1\testdata.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Day01Part2\data.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Day01Part2\testdata.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

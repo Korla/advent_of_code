@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace aoc2021.Day1;
+namespace aoc2021.Day01Part1;
 
 public class Day01Part1
 {
@@ -22,7 +22,7 @@ public class Day01Part1
         [Test]
         public void TestData()
         {
-            var data = File.ReadAllLines(@"Day01/testdata.txt");
+            var data = File.ReadAllLines(@"Day01Part1/testdata.txt");
             var sut = new Day01Part1();
             Assert.AreEqual(7, sut.Run(data));
         }
@@ -30,7 +30,7 @@ public class Day01Part1
         [Test]
         public void Data()
         {
-            var data = File.ReadAllLines(@"Day01/data.txt");
+            var data = File.ReadAllLines(@"Day01Part1/data.txt");
             var sut = new Day01Part1();
             Assert.AreEqual(1446, sut.Run(data));
         }
