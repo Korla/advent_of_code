@@ -1,4 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System;
+using NUnit.Framework;
 
 namespace aoc2021.Day09Part2;
 
@@ -21,6 +25,7 @@ public class Day09Part2
 
     private List<int> RecAddToBasin(List<int> basin, int i, List<char> board, int rowLength)
     {
+        if (board == null) throw new ArgumentNullException(nameof(board));
         var current = board[i];
         if (current == '9' || basin.Contains(i))
         {

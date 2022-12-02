@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using NUnit.Framework;
 
 namespace aoc2021.Day21Part2;

@@ -1,4 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using NUnit.Framework;
 
 namespace aoc2021.Day11Part1;
 
@@ -54,6 +58,7 @@ public class Day11Part1
                     board[curr] = 0;
                 }
             }
+            
             Console.WriteLine($"Generation {gen + 1}");
             LogBoard(board, colCount);
         }
