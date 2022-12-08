@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace aoc2022;
 
+public record Vector(int X, int Y);
+
 public static class EnumerableExtensions
 {
     public static IEnumerable<IList<T>> SlidingWindowValues<T>(this IEnumerable<T> source, int windowSize)
