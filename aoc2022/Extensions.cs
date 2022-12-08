@@ -8,6 +8,9 @@ public record Vector(int X, int Y);
 
 public static class EnumerableExtensions
 {
+    public static int Multiply(this IEnumerable<int> source) => source.Aggregate(1, (prev, curr) => prev * curr);
+    public static int Multiply<T>(this IEnumerable<T> source, Func<T, int> func) => source.Aggregate(1, (prev, curr) => prev * func(curr));
+
     public static IEnumerable<IList<T>> SlidingWindowValues<T>(this IEnumerable<T> source, int windowSize)
     {
         var windows = Enumerable.Range(0, windowSize)
