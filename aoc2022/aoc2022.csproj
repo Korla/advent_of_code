@@ -96,6 +96,12 @@
       <None Update="Day08Part1\testdata.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="Day08Part2\data.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Day08Part2\testdata.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
