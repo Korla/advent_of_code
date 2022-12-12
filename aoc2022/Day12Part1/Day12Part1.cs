@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using utils;
 
 namespace aoc2022.Day12Part1;
 

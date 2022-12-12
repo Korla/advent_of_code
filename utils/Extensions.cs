@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace aoc2022;
+﻿namespace utils;
 
 public record Vector(int X, int Y);
 

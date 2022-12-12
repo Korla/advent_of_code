@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO;
 using NUnit.Framework;
+using utils;
 
 namespace aoc2022.Day06Part1;
 
