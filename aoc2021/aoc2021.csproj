@@ -276,4 +276,8 @@
         </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\utils\utils.csproj" />
+    </ItemGroup>
+
 </Project>
