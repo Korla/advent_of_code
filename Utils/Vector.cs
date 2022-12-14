@@ -22,9 +22,9 @@ public static class VectorExtensions
         var yMax = vectors.Select(v => v.Y).Max();
         var xRange = Enumerable.Range(xMin, xMax-xMin + 1).ToArray();
         var yRange = Enumerable.Range(yMin, yMax-yMin + 1).ToArray();
-        foreach (var x in xRange)
+        foreach (var y in yRange)
         {
-            foreach (var y in yRange)
+            foreach (var x in xRange)
             {
                 var vector = new Vector(x, y);
                 Console.Write(vectors.Any(v => v == vector) ? "X" : ".");
