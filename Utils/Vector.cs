@@ -4,6 +4,12 @@ public record Vector(int X, int Y);
 
 public static class VectorExtensions
 {
+    public static Vector From(string input)
+    {
+        var parts = input.Split(",").ToArray();
+        return new Vector(int.Parse(parts[0]), int.Parse(parts[1]));
+    }
+
     public static Vector Add(this Vector vector, Vector other) => new(vector.X + other.X, vector.Y + other.Y);
     public static Vector Subtract(this Vector vector, Vector other) => new(vector.X - other.X, vector.Y - other.Y);
     public static double Length(this Vector vector) => Math.Sqrt(Math.Pow(Math.Abs(vector.X),2) + Math.Pow(Math.Abs(vector.Y),2));
