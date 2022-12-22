@@ -2,7 +2,7 @@
 
 public static class Pathfinding
 {
-    public static int Dijkstra((int x, int y) start, (int x, int y) targetNode, IReadOnlyDictionary<(int x, int y), (List<(int x, int y)> neighbors, int dist)> map)
+    public static int Dijkstra<T>(T start, T targetNode, IReadOnlyDictionary<T, (List<T> neighbors, int dist)> map)
     {
         //Mark all nodes unvisited. Create a set of all the unvisited nodes called the unvisited set.
         var unvisited = map.Select(x => x.Key).ToHashSet();
@@ -28,9 +28,9 @@ public static class Pathfinding
 
             //If the destination node has been marked visited (when planning a route between two specific nodes) or if the smallest tentative distance among the nodes in the unvisited set is infinity
             //(when planning a complete traversal; occurs when there is no connection between the initial node and remaining unvisited nodes), then stop. The algorithm has finished.
-            if (currentNode == targetNode)
+            if (currentNode.Equals(targetNode))
             {
-                return distanceToInitial[targetNode] - map[(0,0)].dist + map[targetNode].dist;
+                return distanceToInitial[targetNode] - map.First().Value.dist + map[targetNode].dist;
             }
             
             //Otherwise, select the unvisited node that is marked with the smallest tentative distance, set it as the new current node, and go back to step 3.
