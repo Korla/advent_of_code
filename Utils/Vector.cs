@@ -1,6 +1,7 @@
 ﻿namespace Utils;
 
 public record Vector(int X, int Y);
+public record LongVector(long X, long Y);
 
 public static class VectorExtensions
 {
@@ -11,6 +12,10 @@ public static class VectorExtensions
     }
 
     public static Vector Add(this Vector vector, Vector other) => new(vector.X + other.X, vector.Y + other.Y);
+
+    public static LongVector Add(this LongVector vector, LongVector other) =>
+        vector with {X = vector.X + other.X, Y = vector.Y + other.Y};
+
     public static Vector Subtract(this Vector vector, Vector other) => new(vector.X - other.X, vector.Y - other.Y);
     public static double Length(this Vector vector) => Math.Sqrt(Math.Pow(Math.Abs(vector.X),2) + Math.Pow(Math.Abs(vector.Y),2));
     public static int ManhattanDistance(this Vector vector, Vector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
@@ -52,5 +57,45 @@ public static class VectorExtensions
             Console.WriteLine();
         }
         Console.WriteLine("------------------------------------");
+    }
+}
+
+public class LongMatrix
+{
+    public HashSet<LongVector> rows;
+
+    public LongMatrix(int size)
+    {
+        rows = Enumerable.Range(0, size).Select(x => new LongVector(x, 0)).ToHashSet();
+    }
+
+    public LongMatrix(IEnumerable<LongVector> input)
+    {
+        rows = input.ToHashSet();
+    }
+
+    public bool Contains(LongVector vector)
+    {
+        return rows.Contains(vector);
+    }
+
+    public void AddVector(LongVector vector)
+    {
+        rows.Add(vector);
+    }
+
+    public long MaxY()
+    {
+        return rows.Max(pos => pos.Y);
+    }
+
+    public LongMatrix Add(LongVector nextHorizontalPos)
+    {
+        return new LongMatrix(rows.Select(v => v.Add(nextHorizontalPos)).ToHashSet());
+    }
+
+    public bool Overlaps(IEnumerable<LongVector> elements)
+    {
+        return rows.Overlaps(elements);
     }
 }

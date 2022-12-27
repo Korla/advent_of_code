@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,95 +8,118 @@ namespace AoC2022.Day17Part1;
 
 public class Day17Part1
 {
-    private List<Vector[]> _rocks = new()
+    private List<Rock> _rocks = new()
     {
-        new[]
-        {
-            new Vector(0, 0),
-            new Vector(1, 0),
-            new Vector(2, 0),
-            new Vector(3, 0),
-        },
-        new[]
-        {
-            new Vector(1, 0),
-            new Vector(0, 1),
-            new Vector(1, 1),
-            new Vector(2, 1),
-            new Vector(1, 2),
-        },
-        new[]
-        {
-            new Vector(0, 0),
-            new Vector(1, 0),
-            new Vector(2, 0),
-            new Vector(2, 1),
-            new Vector(2, 2),
-        },
-        new[]
-        {
-            new Vector(0, 0),
-            new Vector(0, 1),
-            new Vector(0, 2),
-            new Vector(0, 3),
-        },
-        new[]
-        {
-            new Vector(0, 0),
-            new Vector(0, 1),
-            new Vector(1, 0),
-            new Vector(1, 1),
-        }
+        new(
+            new[]
+            {
+                new LongVector(0, 0),
+                new LongVector(1, 0),
+                new LongVector(2, 0),
+                new LongVector(3, 0),
+            },
+            3, 
+            0
+        ),
+        new(
+            new[]
+            {
+                new LongVector(1, 0),
+                new LongVector(0, 1),
+                new LongVector(1, 1),
+                new LongVector(2, 1),
+                new LongVector(1, 2),
+            },
+            2, 
+            0
+        ),
+        new(
+            new[]
+            {
+                new LongVector(0, 0),
+                new LongVector(1, 0),
+                new LongVector(2, 0),
+                new LongVector(2, 1),
+                new LongVector(2, 2),
+            },
+            2, 
+            0
+        ),
+        new(
+            new[]
+            {
+                new LongVector(0, 0),
+                new LongVector(0, 1),
+                new LongVector(0, 2),
+                new LongVector(0, 3),
+            },
+            0, 
+            0
+        ),
+        new(
+            new[]
+            {
+                new LongVector(0, 0),
+                new LongVector(0, 1),
+                new LongVector(1, 0),
+                new LongVector(1, 1),
+            },
+            1, 
+            0
+        )
     };
 
-    private int Run(IEnumerable<string> data)
+    private double Run(IEnumerable<string> data)
     {
-        var board = Enumerable.Range(0, 7).Select(x => new Vector(x, 0)).ToHashSet();
-        var maxY = 0;
-        var currentPos = new Vector(2, 4);
-        
-        using var jets = Jets(data.First()).GetEnumerator();
-        for(var rockCount = 0; rockCount < 2022; rockCount++)
+        var board = new LongMatrix(7);
+        long maxY = 0;
+        var currentPos = new LongVector(2, 4);
+
+        var jets = data.First();
+        var currentJet = 0;
+        const double totalRockCount = 2022;
+        bool jet;
+        Rock rock;
+        LongVector nextHorizontalPos;
+        LongVector verticalIntersectChecker;
+        var verticalMove = new LongVector(0, -1);
+        var leftMove = new LongVector(-1, 0);
+        var rightMove = new LongVector(1, 0);
+        for(double rockCount = 0; rockCount < totalRockCount; rockCount++)
         {
-            var rock = _rocks[rockCount % 5];
+            rock = _rocks[(int)rockCount % 5];
             while (true)
             {
-                jets.MoveNext();
-                var jet = jets.Current;
+                jet = jets[currentJet] == '>';
+                currentJet = (currentJet + 1) % jets.Length;
         
                 // attempt lateral move
-                var lateralMove = new Vector(jet ? 1 : -1, 0);
-                var lateralIntersectChecker = currentPos.Add(lateralMove);
-                var newLateralRockPositions = rock.Select(pos => pos.Add(lateralIntersectChecker));
-                if (!newLateralRockPositions.Any(p => board.Contains(p) || !p.X.IsBetweenInclusive(0, 6)))
+                nextHorizontalPos = currentPos.Add(jet ? rightMove : leftMove);
+                var isWithinTheBounds = 0 <= nextHorizontalPos.X + rock.MinX && 6 >= nextHorizontalPos.X + rock.MaxX;
+                if (isWithinTheBounds && !board.Overlaps(rock.Elements.Select(p => p.Add(nextHorizontalPos))))
                 {
-                    currentPos = currentPos.Add(lateralMove);
-                    currentPos = currentPos with
-                    {
-                        X = currentPos.X.Limit(0, 6)
-                    };
+                    currentPos = nextHorizontalPos;
                 }
                 // board.Concat(rock.Select(r => r.Add(currentPos))).Print();
         
                 // check if we are at rest
-                var verticalMove = new Vector(0, -1);
-                var verticalIntersectChecker = currentPos.Add(verticalMove);
-                var newVerticalRockPositions = rock.Select(pos => pos.Add(verticalIntersectChecker)).ToList();
-                if (!newVerticalRockPositions.Any(p => board.Contains(p)))
+                verticalIntersectChecker = currentPos.Add(verticalMove);
+                if (!board.Overlaps(rock.Elements.Select(p => p.Add(verticalIntersectChecker))))
                 {
-                    currentPos = currentPos.Add(verticalMove);
+                    currentPos = verticalIntersectChecker;
                     // board.Concat(rock.Select(r => r.Add(currentPos))).Print();
                 }
                 else
                 {
-                    foreach (var newVerticalRockPosition in rock.Select(pos => pos.Add(currentPos)))
+                    // board = board.Concat(rock.Select(pos => pos.Add(currentPos))).ToHashSet();
+                    foreach (var t in rock.Elements)
                     {
-                        board.Add(newVerticalRockPosition);
+                        board.AddVector(t.Add(currentPos));
                     }
                     // board.Print();
         
-                    maxY = board.Max(pos => pos.Y);
-                    currentPos = currentPos with {Y = maxY + 4, X = 2};
+                    maxY = board.MaxY();
+                    currentPos = currentPos with {X = 2, Y = maxY + 4};
                     break;
                 }
             }
@@ -106,16 +128,7 @@ public class Day17Part1
         return maxY;
     }
 
-    private static IEnumerable<bool> Jets(string input)
-    {
-        while (true)
-        {
-            foreach (var s in input)
-            {
-                yield return s == '>';
-            }
-        }
-    }
+    public record Rock(LongVector[] Elements, int MaxX, int MinX);
 
     private class Day17Part1Tests
     {
@@ -132,7 +145,7 @@ public class Day17Part1
         {
             var data = File.ReadAllLines(@"Day17Part1/data.txt");
             var sut = new Day17Part1();
-            Assert.AreEqual(-1, sut.Run(data));
+            Assert.AreEqual(3184, sut.Run(data));
         }
     }
 }
