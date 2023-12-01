@@ -63,6 +63,7 @@ public static class VectorExtensions
 public class LongMatrix
 {
     public HashSet<LongVector> rows;
+    public long MaxY;
 
     public LongMatrix(int size)
     {
@@ -81,12 +82,8 @@ public class LongMatrix
 
     public void AddVector(LongVector vector)
     {
+        MaxY = Math.Max(MaxY, vector.Y);
         rows.Add(vector);
-    }
-
-    public long MaxY()
-    {
-        return rows.Max(pos => pos.Y);
     }
 
     public LongMatrix Add(LongVector nextHorizontalPos)

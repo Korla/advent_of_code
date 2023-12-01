@@ -1,12 +1,12 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using Utils;
 
-namespace AoC2022.Day17Part1;
+namespace AoC2022.Day17Part2;
 
-public class Day17Part1
+public class Day17Part2
 {
     private List<Rock> _rocks = new()
     {
@@ -77,7 +77,7 @@ public class Day17Part1
 
         var jets = data.First();
         var currentJet = 0;
-        const double totalRockCount = 2022;
+        const double totalRockCount = 100000;
         bool jet;
         Rock rock;
         LongVector nextHorizontalPos;
@@ -130,21 +130,21 @@ public class Day17Part1
 
     public record Rock(LongVector[] Elements, int MaxX, int MinX);
 
-    private class Day17Part1Tests
+    private class Day17Part2Tests
     {
         [Test]
         public void TestData()
         {
-            var data = File.ReadAllLines(@"Day17Part1/testdata.txt");
-            var sut = new Day17Part1();
-            Assert.AreEqual(3068, sut.Run(data));
+            var data = File.ReadAllLines(@"Day17Part2/testdata.txt");
+            var sut = new Day17Part2();
+            Assert.AreEqual(1514285714288, sut.Run(data));
         }
     
         [Test]
         public void Data()
         {
-            var data = File.ReadAllLines(@"Day17Part1/data.txt");
-            var sut = new Day17Part1();
+            var data = File.ReadAllLines(@"Day17Part2/data.txt");
+            var sut = new Day17Part2();
             Assert.AreEqual(3184, sut.Run(data));
         }
     }
