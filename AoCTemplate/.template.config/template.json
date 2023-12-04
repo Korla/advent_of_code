@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Me",
+  "classifications": [ "Common", "Code" ],
+  "identity": "AoCTemplate",
+  "name": "Template for a part of a day in AoC",
+  "shortName": "aoc",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "symbols": {
+    "Day":{
+      "type": "parameter",
+      "description": "The day",
+      "datatype": "text",
+      "replaces": "XX",
+      "fileRename": "XX"
+    },
+    "Part":{
+      "type": "parameter",
+      "description": "The part, 1 or 2",
+      "datatype": "text",
+      "replaces": "YY",
+      "fileRename": "YY",
+      "defaultValue": "1"
+    }
+  }
+} 
