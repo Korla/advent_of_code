@@ -12,6 +12,7 @@ public static class VectorExtensions
     }
 
     public static Vector Add(this Vector vector, Vector other) => new(vector.X + other.X, vector.Y + other.Y);
+    public static Vector Multiply(this Vector vector, int scale) => new(vector.X * scale, vector.Y * scale);
 
     public static LongVector Add(this LongVector vector, LongVector other) =>
         vector with {X = vector.X + other.X, Y = vector.Y + other.Y};
