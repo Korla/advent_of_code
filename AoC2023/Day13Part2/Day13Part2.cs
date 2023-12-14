@@ -52,11 +52,7 @@ public class Day13Part2
 
     private (int count, bool isHorizontal)? GetResult(List<string> image, (int count, bool isHorizontal) oldResult)
     {
-        var flippedImage = image
-            .SelectMany(s => s.Select((c,i) => (c, i)))
-            .GroupBy(a1 => a1.i, a2 => a2.c)
-            .Select(a => string.Join("", a.Select(b => b)))
-            .ToList();
+        var flippedImage = image.Flip().ToList();
 
         for (var startY = 0; startY < image.Count - 1; startY++)
         {

@@ -49,4 +49,12 @@ public static class EnumerableExtensions
         while (it.MoveNext())
             yield return resultSelector(previous, previous = it.Current);
     }
+
+    public static IEnumerable<string> Flip(this IEnumerable<string> source)
+    {
+        return source
+            .SelectMany(s => s.Select((c, i) => (c, i)))
+            .GroupBy(a1 => a1.i, a2 => a2.c)
+            .Select(a => string.Join("", a.Select(b => b)));
+    }
 }
