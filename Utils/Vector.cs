@@ -1,6 +1,13 @@
 ﻿namespace Utils;
 
-public record Vector(int X, int Y);
+public record Vector(int X, int Y)
+{
+    public static Vector Origo = new(0, 0);
+    public static Vector Up = new(0, -1);
+    public static Vector Right = new(1, 0);
+    public static Vector Down = new(0, 1);
+    public static Vector Left = new(-1, 0);
+}
 public record LongVector(long X, long Y);
 
 public static class VectorExtensions
