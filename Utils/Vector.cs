@@ -17,6 +17,18 @@ public record Vector(int X, int Y)
         Down,
         Left
     };
+
+    public static Vector Parse(string s)
+    {
+        switch (s)
+        {
+            case "U": return Up;
+            case "R": return Right;
+            case "D": return Down;
+            case "L": return Left;
+            default: throw new Exception();
+        }
+    }
 }
 public record LongVector(long X, long Y);
 
@@ -64,7 +76,7 @@ public static class VectorExtensions
             }
             Console.WriteLine();
         }
-        foreach (var y in yRange.Reverse())
+        foreach (var y in yRange)
         {
             Console.Write(y.ToString());
             Console.Write(" ");
