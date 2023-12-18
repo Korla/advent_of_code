@@ -1,4 +1,6 @@
-﻿namespace Utils;
+﻿using System.Numerics;
+
+namespace Utils;
 
 public record Vector(int X, int Y)
 {
@@ -7,6 +9,14 @@ public record Vector(int X, int Y)
     public static Vector Right = new(1, 0);
     public static Vector Down = new(0, 1);
     public static Vector Left = new(-1, 0);
+
+    public static List<Vector> CardinalDirections = new()
+    {
+        Up,
+        Right,
+        Down,
+        Left
+    };
 }
 public record LongVector(long X, long Y);
 
