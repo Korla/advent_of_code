@@ -1,4 +1,6 @@
-﻿namespace Utils;
+﻿using NUnit.Framework;
+
+namespace Utils;
 
 public static class EnumerableExtensions
 {
@@ -56,5 +58,22 @@ public static class EnumerableExtensions
             .SelectMany(s => s.Select((c, i) => (c, i)))
             .GroupBy(a1 => a1.i, a2 => a2.c)
             .Select(a => string.Join("", a.Select(b => b)));
+    }
+
+    private class EnumerableExtensionsTests
+    {
+        [Test]
+        public void Pairwise()
+        {
+            var data = new List<int> {1, 2, 3}.Pairwise((a,b) => (a, b));
+            Assert.AreEqual(data, new List<(int, int)> { (1,2), (2,3) });
+        }
+
+        [Test]
+        public void SlidingWindowValues()
+        {
+            var data = new List<int> {1, 2, 3}.SlidingWindowValues(2);
+            Assert.AreEqual(data, new List<List<int>> {new() {1, 2}, new() {2,3}});
+        }
     }
 }
