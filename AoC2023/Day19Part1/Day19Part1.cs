@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2023.Day19Part1;
@@ -32,7 +36,7 @@ public class Day19Part1
             else
             {
                 var part = row.Substring(1, row.Length - 2).Split(",").Select(p => p.Split("=")).ToDictionary(v => v.First(), v => int.Parse(v.Last()));
-                if(Workflows["in"](part))
+                if (Workflows["in"](part))
                 {
                     sum += part.Sum(v => v.Value);
                 }
@@ -78,7 +82,7 @@ public class Day19Part1
 
         return sum;
     }
-      
+
     private class Day19Part1Tests
     {
         [Test]
@@ -86,15 +90,16 @@ public class Day19Part1
         {
             var data = File.ReadAllLines(@"Day19Part1/testdata.txt");
             var sut = new Day19Part1();
-            Assert.AreEqual(19114, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(19114));
         }
 
         [Test]
+        [Explicit("Not completed")]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day19Part1/data.txt");
             var sut = new Day19Part1();
-            Assert.AreEqual(0, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(0));
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day10Part2;
@@ -9,8 +9,8 @@ public class Day10Part2
 {
     private long Run(IList<string> data)
     {
-        var matching = new Dictionary<char, char> { {'(', ')'}, {'[', ']'}, {'{', '}'}, {'<', '>'} };
-        var points = new Dictionary<char, int> { {')', 1}, {']', 2}, {'}', 3}, {'>', 4} };
+        var matching = new Dictionary<char, char> { { '(', ')' }, { '[', ']' }, { '{', '}' }, { '<', '>' } };
+        var points = new Dictionary<char, int> { { ')', 1 }, { ']', 2 }, { '}', 3 }, { '>', 4 } };
         var scores = data.Select(row =>
             {
                 var unmatched = "";
@@ -48,15 +48,15 @@ public class Day10Part2
         {
             var data = File.ReadAllLines(@"Day10Part2/testdata.txt");
             var sut = new Day10Part2();
-            Assert.AreEqual(288957, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(288957));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day10Part2/data.txt");
             var sut = new Day10Part2();
-            Assert.AreEqual(2360030859, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(2360030859));
         }
     }
 }

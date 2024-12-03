@@ -11,7 +11,7 @@ public class Day11Part1
 {
     private record Monkey(Queue<int> Items, Func<int, int> Operation, Func<int, int> Test, List<int> Inspected);
 
-    private Dictionary<string, Func<int,Func<int, int>>> Operations = new()
+    private Dictionary<string, Func<int, Func<int, int>>> Operations = new()
     {
         {"*", val => old => old * val},
         {"* old", _ => old => old * old},
@@ -65,15 +65,15 @@ public class Day11Part1
         {
             var data = File.ReadAllLines(@"Day11Part1/testdata.txt");
             var sut = new Day11Part1();
-            Assert.AreEqual(10605, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(10605));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day11Part1/data.txt");
             var sut = new Day11Part1();
-            Assert.AreEqual(54253, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(54253));
         }
     }
 }

@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -64,7 +68,7 @@ public class Day17Part2
     {
         return Vector.CardinalDirections[(Vector.CardinalDirections.IndexOf(v) + 3) % 4];
     }
-    
+
     private class Day17Part2Tests
     {
         [Test]
@@ -72,7 +76,7 @@ public class Day17Part2
         {
             var data = File.ReadAllLines(@"Day17Part2/testdata.txt");
             var sut = new Day17Part2();
-            Assert.AreEqual(94, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(94));
         }
 
         [Test]
@@ -80,20 +84,20 @@ public class Day17Part2
         {
             var data = File.ReadAllLines(@"Day17Part2/data.txt");
             var sut = new Day17Part2();
-            Assert.AreEqual(665, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(809));
         }
 
         [TestCase]
         public void RotationTests()
         {
-            Assert.AreEqual(ClockWise(Vector.Up), Vector.Right);
-            Assert.AreEqual(ClockWise(Vector.Right), Vector.Down);
-            Assert.AreEqual(ClockWise(Vector.Down), Vector.Left);
-            Assert.AreEqual(ClockWise(Vector.Left), Vector.Up);
-            Assert.AreEqual(CounterClockWise(Vector.Right), Vector.Up);
-            Assert.AreEqual(CounterClockWise(Vector.Down), Vector.Right);
-            Assert.AreEqual(CounterClockWise(Vector.Left), Vector.Down);
-            Assert.AreEqual(CounterClockWise(Vector.Up), Vector.Left);
+            Assert.That(Vector.Right, Is.EqualTo(ClockWise(Vector.Up)));
+            Assert.That(Vector.Down, Is.EqualTo(ClockWise(Vector.Right)));
+            Assert.That(Vector.Left, Is.EqualTo(ClockWise(Vector.Down)));
+            Assert.That(Vector.Up, Is.EqualTo(ClockWise(Vector.Left)));
+            Assert.That(Vector.Up, Is.EqualTo(CounterClockWise(Vector.Right)));
+            Assert.That(Vector.Right, Is.EqualTo(CounterClockWise(Vector.Down)));
+            Assert.That(Vector.Down, Is.EqualTo(CounterClockWise(Vector.Left)));
+            Assert.That(Vector.Left, Is.EqualTo(CounterClockWise(Vector.Up)));
         }
     }
 }

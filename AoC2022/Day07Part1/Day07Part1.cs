@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
@@ -21,7 +21,7 @@ public class Day07Part1
         {
             ParseRow("$ cd ..", directorySizes, dir);
         }
-        
+
         return directorySizes.Where(d => d.Value < 100000).Sum(d => d.Value);
     }
 
@@ -55,15 +55,15 @@ public class Day07Part1
         {
             var data = File.ReadAllLines(@"Day07Part1/testdata.txt");
             var sut = new Day07Part1();
-            Assert.AreEqual(95437, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(95437));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day07Part1/data.txt");
             var sut = new Day07Part1();
-            Assert.AreEqual(1443806, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1443806));
         }
     }
 }

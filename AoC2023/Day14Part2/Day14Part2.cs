@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2023.Day14Part2;
@@ -50,7 +53,7 @@ public class Day14Part2
     {
         return data.Select((row, i) => row.Count(c => c == 'O') * (data.Count() - i)).Sum();
     }
-      
+
     private class Day14Part2Tests
     {
         [Test]
@@ -58,7 +61,7 @@ public class Day14Part2
         {
             var data = File.ReadAllLines(@"Day14Part2/testdata.txt");
             var sut = new Day14Part2();
-            Assert.AreEqual(64, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(64));
         }
 
         [Test]
@@ -66,7 +69,7 @@ public class Day14Part2
         {
             var data = File.ReadAllLines(@"Day14Part2/data.txt");
             var sut = new Day14Part2();
-            Assert.AreEqual(105606, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(105606));
         }
     }
 }

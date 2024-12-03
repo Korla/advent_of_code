@@ -7,7 +7,7 @@ namespace AoC2021.Day21Part2;
 public class Day21Part2
 {
     private static readonly (int add, int count)[] PossibleRolls =
-        {(3, 1), (4, 3), (5, 6), (6, 7), (7, 6), (8, 3), (9, 1)};
+        { (3, 1), (4, 3), (5, 6), (6, 7), (7, 6), (8, 3), (9, 1) };
 
     private static readonly Func<(int who, int player1, int player2, int score1, int score2), long[]> MemoizedSolveRec =
         Memoize<(int who, int player1, int player2, int score1, int score2), long[]>(SolveRec);
@@ -15,13 +15,13 @@ public class Day21Part2
     private static long[] SolveRec((int who, int player1, int player2, int score1, int score2) input)
     {
         var (who, player1, player2, score1, score2) = input;
-        var players = new[] {player1, player2};
-        var scores = new[] {score1, score2};
+        var players = new[] { player1, player2 };
+        var scores = new[] { score1, score2 };
 
-        if (scores[0] >= 21) return new long[] {1, 0};
-        if (scores[1] >= 21) return new long[] {0, 1};
+        if (scores[0] >= 21) return new long[] { 1, 0 };
+        if (scores[1] >= 21) return new long[] { 0, 1 };
 
-        var ans = new long[] {0, 0};
+        var ans = new long[] { 0, 0 };
 
         foreach (var (add, count) in PossibleRolls)
         {
@@ -55,14 +55,14 @@ public class Day21Part2
         public void TestData()
         {
             var sut = new Day21Part2();
-            Assert.AreEqual(444356092776315, sut.Run(4, 8));
+            Assert.That(sut.Run(4, 8), Is.EqualTo(444356092776315));
         }
 
         [Test]
         public void Data()
         {
             var sut = new Day21Part2();
-            Assert.AreEqual(712381680443927, sut.Run(6, 8));
+            Assert.That(sut.Run(6, 8), Is.EqualTo(712381680443927));
         }
     }
 }

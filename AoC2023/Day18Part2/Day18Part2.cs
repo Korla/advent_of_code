@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -31,7 +34,7 @@ public class Day18Part2
                 }
             );
         var (loop, _, perimeter) = res;
-            
+
         return loop.Pairwise((a, b) => (long)a.X * b.Y - (long)a.Y * b.X).Sum() / 2 + perimeter / 2 + 1;
     }
 
@@ -42,7 +45,7 @@ public class Day18Part2
         {
             var data = File.ReadAllLines(@"Day18Part2/testdata.txt");
             var sut = new Day18Part2();
-            Assert.AreEqual(952408144115, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(952408144115));
         }
 
         [Test]
@@ -50,7 +53,7 @@ public class Day18Part2
         {
             var data = File.ReadAllLines(@"Day18Part2/data.txt");
             var sut = new Day18Part2();
-            Assert.AreEqual(45757884535661, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(45757884535661));
         }
     }
 }

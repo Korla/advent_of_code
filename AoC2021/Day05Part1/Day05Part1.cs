@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day05Part1;
@@ -36,10 +36,12 @@ public class Day05Part1
         {
             (x1, x2) = (x2, x1);
         }
+
         if (y1 > y2)
         {
             (y1, y2) = (y2, y1);
         }
+
         return
             x1 == x2 ? Enumerable.Range(y1, y2 - y1 + 1).Select(y => (x1, y)).ToList() :
             y1 == y2 ? Enumerable.Range(x1, x2 - x1 + 1).Select(x => (x, y1)).ToList() :
@@ -53,15 +55,15 @@ public class Day05Part1
         {
             var data = File.ReadAllLines(@"Day05Part1/testdata.txt");
             var sut = new Day05Part1();
-            Assert.AreEqual(5, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(5));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day05Part1/data.txt");
             var sut = new Day05Part1();
-            Assert.AreEqual(6710, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(6710));
         }
     }
 }

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -34,8 +37,8 @@ public class Day11Part1
                     noYGalaxy = false;
                 }
             }
-            if(noXGalaxy) xToExpand.Add(i);
-            if(noYGalaxy) yToExpand.Add(i);
+            if (noXGalaxy) xToExpand.Add(i);
+            if (noYGalaxy) yToExpand.Add(i);
         }
 
         return galaxies.Select(g => new Vector(
@@ -62,7 +65,7 @@ public class Day11Part1
         {
             var data = File.ReadAllLines(@"Day11Part1/testdata.txt");
             var sut = new Day11Part1();
-            Assert.AreEqual(374, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(374));
         }
 
         [Test]
@@ -70,7 +73,7 @@ public class Day11Part1
         {
             var data = File.ReadAllLines(@"Day11Part1/data.txt");
             var sut = new Day11Part1();
-            Assert.AreEqual(9214785, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(9214785));
         }
     }
 }

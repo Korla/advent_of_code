@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -21,7 +20,7 @@ public class Day01Part2
         return lists.Item1
             .Sum(i => lists.Item2.Count(a => a == i) * i);
     }
-    
+
     private class Day01Part2Tests
     {
         [Test]
@@ -31,7 +30,7 @@ public class Day01Part2
             var sut = new Day01Part2();
             Assert.That(sut.Run(data), Is.EqualTo(31));
         }
-    
+
         [Test]
         public void Data()
         {

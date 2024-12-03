@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day13Part2;
@@ -10,7 +10,7 @@ public class Day13Part2
 {
     private int Run(IList<string> data)
     {
-        var coords = new HashSet<(int X, int Y)>(); 
+        var coords = new HashSet<(int X, int Y)>();
         var folds = new List<(bool alongX, int pos)>();
         foreach (var row in data)
         {
@@ -63,7 +63,6 @@ public class Day13Part2
                 {
                     Console.Write("-");
                 }
-
             }
 
             Console.WriteLine();
@@ -79,15 +78,15 @@ public class Day13Part2
         {
             var data = File.ReadAllLines(@"Day13Part2/testdata.txt");
             var sut = new Day13Part2();
-            Assert.AreEqual(16, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(16));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day13Part2/data.txt");
             var sut = new Day13Part2();
-            Assert.AreEqual(91, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(91));
         }
     }
 }

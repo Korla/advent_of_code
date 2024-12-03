@@ -32,7 +32,7 @@ public class Day12Part1
                     currentValue = 'z';
                 }
 
-                var valueTuples = new[] {(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)};
+                var valueTuples = new[] { (x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1) };
                 var neighbors = valueTuples
                     .Where(v => v.Item1.IsBetweenInclusive(0, maxX - 1) && v.Item2.IsBetweenInclusive(0, maxY - 1) && data[v.Item2][v.Item1] - currentValue <= 1)
                     .ToList();
@@ -54,15 +54,15 @@ public class Day12Part1
         {
             var data = File.ReadAllLines(@"Day12Part1/testdata.txt");
             var sut = new Day12Part1();
-            Assert.AreEqual(31, sut.Run(data, (5,2)));
+            Assert.That(sut.Run(data, (5, 2)), Is.EqualTo(31));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day12Part1/data.txt");
             var sut = new Day12Part1();
-            Assert.AreEqual(449, sut.Run(data, (107,20)));
+            Assert.That(sut.Run(data, (107, 20)), Is.EqualTo(449));
         }
     }
 }

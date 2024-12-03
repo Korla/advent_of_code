@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -58,15 +57,15 @@ public class Day15Part2
         {
             var data = File.ReadAllLines(@"Day15Part2/testdata.txt");
             var sut = new Day15Part2();
-            Assert.AreEqual(56000011, sut.Run(data, 20));
+            Assert.That(sut.Run(data, 20), Is.EqualTo(56000011));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day15Part2/data.txt");
             var sut = new Day15Part2();
-            Assert.AreEqual(12691026767556, sut.Run(data, 4000000));
+            Assert.That(sut.Run(data, 4000000), Is.EqualTo(12691026767556));
         }
     }
 }

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -39,7 +42,7 @@ public class Day10Part1
                 if (value == 'S')
                 {
                     start = vector;
-                } 
+                }
                 else if (ValueMap.ContainsKey(value))
                 {
                     grid.Add(vector, ValueMap[value].Select(v => v.Add(vector)).ToList());
@@ -59,7 +62,7 @@ public class Day10Part1
     private IEnumerable<Vector> GetLoop(Vector start, IReadOnlyDictionary<Vector, List<Vector>> grid)
     {
         var visited = new List<Vector> { start };
-        while(true)
+        while (true)
         {
             var possibleMoves = grid[visited.Last()].Except(visited).ToList();
             if (!possibleMoves.Any())
@@ -78,7 +81,7 @@ public class Day10Part1
         {
             var data = File.ReadAllLines(@"Day10Part1/testdata.txt");
             var sut = new Day10Part1();
-            Assert.AreEqual(4, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(4));
         }
 
         [Test]
@@ -86,7 +89,7 @@ public class Day10Part1
         {
             var data = File.ReadAllLines(@"Day10Part1/data.txt");
             var sut = new Day10Part1();
-            Assert.AreEqual(6697, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(6697));
         }
     }
 }

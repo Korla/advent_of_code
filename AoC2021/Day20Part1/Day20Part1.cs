@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day20Part1;
@@ -33,15 +33,16 @@ public class Day20Part1
         return nextBoard.GroupBy(x => x.Value).First(g => g.Key == '#').Count();
     }
 
-    private void Print(Dictionary<(int x, int y),char> board)
+    private void Print(Dictionary<(int x, int y), char> board)
     {
-        var size = (int) Math.Sqrt(board.Count);
+        var size = (int)Math.Sqrt(board.Count);
         for (var y = 0; y < size; y++)
         {
             for (var x = 0; x < size; x++)
             {
-                Console.Write(board[(x,y)]);
+                Console.Write(board[(x, y)]);
             }
+
             Console.WriteLine();
         }
     }
@@ -49,7 +50,7 @@ public class Day20Part1
     private Dictionary<(int x, int y), char> Enhance(Dictionary<(int x, int y), char> board, string algorithm, int gen)
     {
         var def = algorithm[0] == '.' ? '.' : gen % 2 == 0 ? '.' : '#';
-        var oldSize = (int) Math.Sqrt(board.Count);
+        var oldSize = (int)Math.Sqrt(board.Count);
         var newMax = oldSize + 1;
         var extended = new Dictionary<(int x, int y), char>();
         for (var y = 0; y < oldSize; y++)
@@ -74,7 +75,7 @@ public class Day20Part1
         extended.Add((0, newMax), def);
         extended.Add((newMax, 0), def);
         extended.Add((newMax, newMax), def);
-        
+
         var nextBoard = new Dictionary<(int x, int y), char>();
         foreach (var ((x, y), vOld) in extended)
         {
@@ -96,15 +97,15 @@ public class Day20Part1
         {
             var data = File.ReadAllLines(@"Day20Part1/testdata.txt");
             var sut = new Day20Part1();
-            Assert.AreEqual(35, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(35));
         }
-        
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day20Part1/data.txt");
             var sut = new Day20Part1();
-            Assert.AreEqual(5647, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(5647));
         }
     }
 }

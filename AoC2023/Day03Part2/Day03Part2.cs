@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using NUnit.Framework;
 using Utils;
 
 namespace AoC2023.Day03Part2;
@@ -46,7 +49,7 @@ public class Day03Part2
                 }
                 else
                 {
-                    allNumbers.Add((new List<Vector> { pos },value));
+                    allNumbers.Add((new List<Vector> { pos }, value));
                 }
 
                 lastNumberPos = pos;
@@ -67,7 +70,7 @@ public class Day03Part2
             .Where(d => d.Count() == 2)
             .Sum(d => d.Multiply());
     }
-    
+
     private class Day03Part2Tests
     {
         [Test]
@@ -75,15 +78,15 @@ public class Day03Part2
         {
             var data = File.ReadAllLines(@"Day03Part2/testdata.txt");
             var sut = new Day03Part2();
-            Assert.AreEqual(467835, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(467835));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day03Part2/data.txt");
             var sut = new Day03Part2();
-            Assert.AreEqual(91622824, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(91622824));
         }
     }
 }

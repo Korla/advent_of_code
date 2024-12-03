@@ -13,7 +13,7 @@ public class Day13Part2 : IComparer<string>
     {
         const string d1 = "[[2]]";
         const string d2 = "[[6]]";
-        var ordered = data.Concat(new[] {d1, d2}).Where(d => !string.IsNullOrEmpty(d)).OrderDescending(new Day13Part2())
+        var ordered = data.Concat(new[] { d1, d2 }).Where(d => !string.IsNullOrEmpty(d)).OrderDescending(new Day13Part2())
             .ToList();
 
         return (ordered.IndexOf(d1) + 1) * (ordered.IndexOf(d2) + 1);
@@ -113,15 +113,15 @@ public class Day13Part2 : IComparer<string>
         {
             var data = File.ReadAllLines(@"Day13Part2/testdata.txt");
             var sut = new Day13Part2();
-            Assert.AreEqual(140, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(140));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day13Part2/data.txt");
             var sut = new Day13Part2();
-            Assert.AreEqual(22600, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(22600));
         }
     }
 }

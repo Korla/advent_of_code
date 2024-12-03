@@ -31,7 +31,7 @@ public class Day08Part1
         return forest.Count(tree => !_directions.All(direction => IsNotVisible(forest, tree, direction)));
     }
 
-    private bool IsNotVisible(IReadOnlyDictionary<Vector,int> forest, KeyValuePair<Vector,int> tree, Vector direction) => 
+    private bool IsNotVisible(IReadOnlyDictionary<Vector, int> forest, KeyValuePair<Vector, int> tree, Vector direction) =>
         TraverseDirection(forest, tree, direction).Any(otherTreeHeight => otherTreeHeight >= tree.Value);
 
     private IEnumerable<int> TraverseDirection(IReadOnlyDictionary<Vector, int> forest, KeyValuePair<Vector, int> tree, Vector direction)
@@ -50,15 +50,15 @@ public class Day08Part1
         {
             var data = File.ReadAllLines(@"Day08Part1/testdata.txt");
             var sut = new Day08Part1();
-            Assert.AreEqual(21, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(21));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day08Part1/data.txt");
             var sut = new Day08Part1();
-            Assert.AreEqual(1829, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1829));
         }
     }
 }

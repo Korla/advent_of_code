@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -34,7 +37,7 @@ public class Day09Part1
         return differences.Reverse()
             .Aggregate(0, (lastDiff, difference) => lastDiff + difference.Last());
     }
-      
+
     private class Day09Part1Tests
     {
         [Test]
@@ -42,7 +45,7 @@ public class Day09Part1
         {
             var data = File.ReadAllLines(@"Day09Part1/testdata.txt");
             var sut = new Day09Part1();
-            Assert.AreEqual(114, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(114));
         }
 
         [Test]
@@ -50,7 +53,7 @@ public class Day09Part1
         {
             var data = File.ReadAllLines(@"Day09Part1/data.txt");
             var sut = new Day09Part1();
-            Assert.AreEqual(1708206096, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1708206096));
         }
     }
 }

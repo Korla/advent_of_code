@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using NUnit.Framework;
 
@@ -67,6 +67,7 @@ public class Day19Part1
         {
             queue.Enqueue(scanner);
         }
+
         while (queue.Any())
         {
             var current = queue.Dequeue();
@@ -79,6 +80,7 @@ public class Day19Part1
                 result = nextResult;
             }
         }
+
         return result.Report.Count;
     }
 
@@ -89,7 +91,7 @@ public class Day19Part1
         {
             var scannerMatch = row.StartsWith("--");
             var parts = row.Split(',');
-            if(scannerMatch) scanners.Add(new Scanner());
+            if (scannerMatch) scanners.Add(new Scanner());
             else if (parts.Length == 3)
                 scanners.Last().Report.Add(new Vector3(int.Parse(parts[0]), int.Parse(parts[1]), int.Parse(parts[2])));
         }
@@ -99,13 +101,13 @@ public class Day19Part1
 
     private static IEnumerable<List<Vector3>> AllRotations(List<Vector3> vectors)
     {
-        foreach (var _ in Enumerable.Range(0,2))
+        foreach (var _ in Enumerable.Range(0, 2))
         {
-            foreach (var __ in Enumerable.Range(0,3))
+            foreach (var __ in Enumerable.Range(0, 3))
             {
                 vectors = vectors.Select(Roll).ToList();
                 yield return vectors;
-                foreach (var ___ in Enumerable.Range(0,3))
+                foreach (var ___ in Enumerable.Range(0, 3))
                 {
                     vectors = vectors.Select(Turn).ToList();
                     yield return vectors;
@@ -128,16 +130,16 @@ public class Day19Part1
         {
             var data = File.ReadAllLines(@"Day19Part1/testdata.txt");
             var scanners = Parse(data);
-            Assert.AreEqual(5, scanners.Count);
-            Assert.AreEqual(25, scanners.First().Report.Count);
+            Assert.That(scanners.Count, Is.EqualTo(5));
+            Assert.That(scanners.First().Report.Count, Is.EqualTo(25));
         }
-        
+
         [Test]
         public void TestRotate()
         {
-            var sequence = AllRotations(new List<Vector3>{new(1, 2, 3), new(1, 1, 1)}).Distinct();
-            Assert.AreEqual(24, sequence.Count());
-            Assert.AreEqual(2, sequence.First().Count);
+            var sequence = AllRotations(new List<Vector3> { new(1, 2, 3), new(1, 1, 1) }).Distinct();
+            Assert.That(sequence.Count(), Is.EqualTo(24));
+            Assert.That(sequence.First().Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -162,11 +164,11 @@ public class Day19Part1
                     new(0, 1, 0)
                 }
             };
-            Assert.AreEqual(true, scanner0.Match(scanner1, 3, out var intersected));
-            Assert.NotNull(intersected);
-            Assert.Contains(new Vector3(5, 3, 0), intersected.Report);
+            Assert.That(scanner0.Match(scanner1, 3, out var intersected), Is.EqualTo(true));
+            Assert.That(intersected, Is.Not.Null);
+            Assert.That(intersected.Report.Contains(new Vector3(5, 3, 0)));
         }
-        
+
         [Test]
         public void TestMatchSimpleRotated()
         {
@@ -189,9 +191,9 @@ public class Day19Part1
                     new(1, 0, 0)
                 }
             };
-            Assert.AreEqual(true, scanner0.Match(scanner1, 3, out var intersected));
-            Assert.NotNull(intersected);
-            Assert.Contains(new Vector3(5, 3, 0), intersected.Report);
+            Assert.That(scanner0.Match(scanner1, 3, out var intersected), Is.EqualTo(true));
+            Assert.That(intersected, Is.Not.Null);
+            Assert.That(intersected.Report.Contains(new Vector3(5, 3, 0)));
         }
 
         [Test]
@@ -199,8 +201,8 @@ public class Day19Part1
         {
             var data = File.ReadAllLines(@"Day19Part1/testdata.txt");
             var scanners = Parse(data);
-            Assert.AreEqual(true, scanners[0].Match(scanners[1], 12, out var intersected));
-            Assert.NotNull(intersected);
+            Assert.That(scanners[0].Match(scanners[1], 12, out var intersected), Is.EqualTo(true));
+            Assert.That(intersected, Is.Not.Null);
         }
 
         [Test]
@@ -208,15 +210,15 @@ public class Day19Part1
         {
             var data = File.ReadAllLines(@"Day19Part1/testdata.txt");
             var sut = new Day19Part1();
-            Assert.AreEqual(79, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(79));
         }
-        
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day19Part1/data.txt");
             var sut = new Day19Part1();
-            Assert.AreEqual(315, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(315));
         }
     }
 }

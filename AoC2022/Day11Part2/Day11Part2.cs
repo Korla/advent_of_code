@@ -10,7 +10,7 @@ public class Day11Part2
 {
     private record Monkey(Queue<long> Items, Func<long, long> Operation, Func<long, int> Test, List<long> Inspected);
 
-    private Dictionary<string, Func<long,Func<long, long>>> Operations = new()
+    private Dictionary<string, Func<long, Func<long, long>>> Operations = new()
     {
         {"*", val => old => old * val},
         {"* old", _ => old => old * old},
@@ -57,7 +57,7 @@ public class Day11Part2
         }
 
         var a = monkeys.Select(m => m.Inspected.Count).OrderDescending().ToArray();
-        return a[0] * (long) a[1];
+        return a[0] * (long)a[1];
     }
 
     private class Day11Part2Tests
@@ -67,15 +67,15 @@ public class Day11Part2
         {
             var data = File.ReadAllLines(@"Day11Part2/testdata.txt");
             var sut = new Day11Part2();
-            Assert.AreEqual(2713310158, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(2713310158));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day11Part2/data.txt");
             var sut = new Day11Part2();
-            Assert.AreEqual(13119526120, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(13119526120));
         }
     }
 }

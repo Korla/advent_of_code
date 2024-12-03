@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
@@ -42,7 +42,7 @@ public class Day18Part2
             var start = 1;
             var end = input.Length - 1;
             var openCount = 0;
-            for(var i = start; i < end; i++)
+            for (var i = start; i < end; i++)
             {
                 var c = input[i];
                 if (c == '[') openCount++;
@@ -83,8 +83,8 @@ public class Day18Part2
         {
             foreach (var s2 in data)
             {
-                permutations.Add(new []{ s1, s2});
-                permutations.Add(new []{ s2, s1});
+                permutations.Add(new[] { s1, s2 });
+                permutations.Add(new[] { s2, s1 });
             }
         }
 
@@ -99,7 +99,8 @@ public class Day18Part2
         {
             var value = int.Parse(m.Value);
             var startIndex = m.Index;
-            return new Salmon {Value = value, StartIndex = startIndex, EndIndex = startIndex + value.ToString().Length - 1};
+            return new Salmon
+            { Value = value, StartIndex = startIndex, EndIndex = startIndex + value.ToString().Length - 1 };
         }).ToList();
         var integersReversed = integers.OrderBy(v => -v.StartIndex).ToList();
         var openCount = 0;
@@ -116,8 +117,9 @@ public class Day18Part2
                 {
                     if (input[end] == ']') break;
                 }
+
                 var indexOfLeft = start + 1;
-                integers.Add(new Salmon { Value = 0, StartIndex = start, EndIndex = start});
+                integers.Add(new Salmon { Value = 0, StartIndex = start, EndIndex = start });
                 var left = integers.First(v => v.StartIndex == indexOfLeft);
                 var right = integers.First(v => v.StartIndex > indexOfLeft);
                 integers.Remove(left);
@@ -154,7 +156,7 @@ public class Day18Part2
         }).ToList();
         var target = integers.FirstOrDefault(v => v.Value > 9);
         if (target == null) return input;
-        var half = target.Value / (double) 2;
+        var half = target.Value / (double)2;
         var first = input[..target.StartIndex];
         var s = input[(target.StartIndex + 2)..];
         return $"{first}[{Math.Floor(half)},{Math.Ceiling(half)}]{s}";
@@ -180,15 +182,15 @@ public class Day18Part2
         {
             var data = File.ReadAllLines(@"Day18Part2/testdata.txt");
             var sut = new Day18Part2();
-            Assert.AreEqual(3993, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(3993));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day18Part2/data.txt");
             var sut = new Day18Part2();
-            Assert.AreEqual(4650, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(4650));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day16Part1;
@@ -12,22 +12,22 @@ public class Day16Part1
     {
         var map = new Dictionary<char, string>
         {
-            {'0', "0000"},
-            {'1', "0001"},
-            {'2', "0010"},
-            {'3', "0011"},
-            {'4', "0100"},
-            {'5', "0101"},
-            {'6', "0110"},
-            {'7', "0111"},
-            {'8', "1000"},
-            {'9', "1001"},
-            {'A', "1010"},
-            {'B', "1011"},
-            {'C', "1100"},
-            {'D', "1101"},
-            {'E', "1110"},
-            {'F', "1111"}
+            { '0', "0000" },
+            { '1', "0001" },
+            { '2', "0010" },
+            { '3', "0011" },
+            { '4', "0100" },
+            { '5', "0101" },
+            { '6', "0110" },
+            { '7', "0111" },
+            { '8', "1000" },
+            { '9', "1001" },
+            { 'A', "1010" },
+            { 'B', "1011" },
+            { 'C', "1100" },
+            { 'D', "1101" },
+            { 'E', "1110" },
+            { 'F', "1111" }
         };
         var binaryString = string.Join("", data.First().Select(c => map[c]));
         var current = 0;
@@ -62,6 +62,7 @@ public class Day16Part1
             {
                 total += RecRead();
             }
+
             return total;
         }
 
@@ -73,6 +74,7 @@ public class Day16Part1
             {
                 total += RecRead();
             }
+
             return total;
         }
 
@@ -111,15 +113,15 @@ public class Day16Part1
         public void TestData(string input, long expected)
         {
             var sut = new Day16Part1();
-            Assert.AreEqual(expected, sut.Run(new List<string> { input }));
+            Assert.That(sut.Run(new List<string> { input }), Is.EqualTo(expected));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day16Part1/data.txt");
             var sut = new Day16Part1();
-            Assert.AreEqual(999, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(999));
         }
     }
 }

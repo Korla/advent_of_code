@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Utils;
@@ -41,7 +40,7 @@ public class Day02Part2
         return deltas.All(delta =>
             isIncreasing ? delta.IsBetweenInclusive(1, 3) : delta.IsBetweenInclusive(-3, -1));
     }
-    
+
     private class Day02Part2Tests
     {
         [Test]
@@ -51,7 +50,7 @@ public class Day02Part2
             var sut = new Day02Part2();
             Assert.That(sut.Run(data), Is.EqualTo(4));
         }
-    
+
         [Test]
         public void Data()
         {

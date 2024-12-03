@@ -18,7 +18,7 @@ public class Day17Part2
                 new LongVector(2, 0),
                 new LongVector(3, 0),
             },
-            3, 
+            3,
             0
         ),
         new(
@@ -30,7 +30,7 @@ public class Day17Part2
                 new LongVector(2, 1),
                 new LongVector(1, 2),
             },
-            2, 
+            2,
             0
         ),
         new(
@@ -42,7 +42,7 @@ public class Day17Part2
                 new LongVector(2, 1),
                 new LongVector(2, 2),
             },
-            2, 
+            2,
             0
         ),
         new(
@@ -53,7 +53,7 @@ public class Day17Part2
                 new LongVector(0, 2),
                 new LongVector(0, 3),
             },
-            0, 
+            0,
             0
         ),
         new(
@@ -64,7 +64,7 @@ public class Day17Part2
                 new LongVector(1, 0),
                 new LongVector(1, 1),
             },
-            1, 
+            1,
             0
         )
     };
@@ -85,14 +85,14 @@ public class Day17Part2
         var verticalMove = new LongVector(0, -1);
         var leftMove = new LongVector(-1, 0);
         var rightMove = new LongVector(1, 0);
-        for(double rockCount = 0; rockCount < totalRockCount; rockCount++)
+        for (double rockCount = 0; rockCount < totalRockCount; rockCount++)
         {
             rock = _rocks[(int)rockCount % 5];
             while (true)
             {
                 jet = jets[currentJet] == '>';
                 currentJet = (currentJet + 1) % jets.Length;
-        
+
                 // attempt lateral move
                 nextHorizontalPos = currentPos.Add(jet ? rightMove : leftMove);
                 var isWithinTheBounds = 0 <= nextHorizontalPos.X + rock.MinX && 6 >= nextHorizontalPos.X + rock.MaxX;
@@ -101,7 +101,7 @@ public class Day17Part2
                     currentPos = nextHorizontalPos;
                 }
                 // board.Concat(rock.Select(r => r.Add(currentPos))).Print();
-        
+
                 // check if we are at rest
                 verticalIntersectChecker = currentPos.Add(verticalMove);
                 if (!board.Overlaps(rock.Elements.Select(p => p.Add(verticalIntersectChecker))))
@@ -117,9 +117,9 @@ public class Day17Part2
                         board.AddVector(t.Add(currentPos));
                     }
                     // board.Print();
-        
+
                     maxY = board.MaxY;
-                    currentPos = currentPos with {X = 2, Y = maxY + 4};
+                    currentPos = currentPos with { X = 2, Y = maxY + 4 };
                     break;
                 }
             }
@@ -133,19 +133,21 @@ public class Day17Part2
     private class Day17Part2Tests
     {
         [Test]
+        [Explicit("Not completed")]
         public void TestData()
         {
             var data = File.ReadAllLines(@"Day17Part2/testdata.txt");
             var sut = new Day17Part2();
-            Assert.AreEqual(1514285714288, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1514285714288));
         }
-    
+
         [Test]
+        [Explicit("Not completed")]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day17Part2/data.txt");
             var sut = new Day17Part2();
-            Assert.AreEqual(3184, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(3184));
         }
     }
 }

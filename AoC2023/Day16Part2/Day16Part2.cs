@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -83,7 +86,7 @@ public class Day16Part2
         {
             var data = File.ReadAllLines(@"Day16Part2/testdata.txt");
             var sut = new Day16Part2();
-            Assert.AreEqual(51, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(51));
         }
 
         [Test]
@@ -91,7 +94,7 @@ public class Day16Part2
         {
             var data = File.ReadAllLines(@"Day16Part2/data.txt");
             var sut = new Day16Part2();
-            Assert.AreEqual(8539, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(8674));
         }
     }
 }

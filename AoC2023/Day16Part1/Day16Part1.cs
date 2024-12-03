@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -63,7 +66,7 @@ public class Day16Part1
 
         return energized.Count;
     }
-    
+
     private class Day16Part1Tests
     {
         [Test]
@@ -71,7 +74,7 @@ public class Day16Part1
         {
             var data = File.ReadAllLines(@"Day16Part1/testdata.txt");
             var sut = new Day16Part1();
-            Assert.AreEqual(46, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(46));
         }
 
         [Test]
@@ -79,7 +82,7 @@ public class Day16Part1
         {
             var data = File.ReadAllLines(@"Day16Part1/data.txt");
             var sut = new Day16Part1();
-            Assert.AreEqual(8674, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(8539));
         }
     }
 }

@@ -48,14 +48,14 @@ public class Day17Part2
         public void TestData()
         {
             var sut = new Day17Part2();
-            Assert.AreEqual(112, sut.Run(20, 30, -10, -5));
+            Assert.That(sut.Run(20, 30, -10, -5), Is.EqualTo(112));
         }
-    
+
         [Test]
         public void Data()
         {
             var sut = new Day17Part2();
-            Assert.AreEqual(2032, sut.Run(211, 232, -124, -69));
+            Assert.That(sut.Run(211, 232, -124, -69), Is.EqualTo(2032));
         }
     }
 }

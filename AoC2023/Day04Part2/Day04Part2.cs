@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using NUnit.Framework;
 using Utils;
 
 namespace AoC2023.Day04Part2;
@@ -30,7 +33,7 @@ public class Day04Part2
             .Sum();
         return counts;
     }
-    
+
     private class Day04Part2Tests
     {
         [Test]
@@ -38,15 +41,15 @@ public class Day04Part2
         {
             var data = File.ReadAllLines(@"Day04Part2/testdata.txt");
             var sut = new Day04Part2();
-            Assert.AreEqual(30, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(30));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day04Part2/data.txt");
             var sut = new Day04Part2();
-            Assert.AreEqual(11787590, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(11787590));
         }
     }
 }

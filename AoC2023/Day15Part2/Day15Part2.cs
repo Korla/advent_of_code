@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2023.Day15Part2;
@@ -61,7 +65,7 @@ public class Day15Part2
 
         throw new Exception();
     }
-      
+
     private class Day15Part2Tests
     {
         [Test]
@@ -69,7 +73,7 @@ public class Day15Part2
         {
             var data = File.ReadAllLines(@"Day15Part2/testdata.txt");
             var sut = new Day15Part2();
-            Assert.AreEqual(145, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(145));
         }
 
         [Test]
@@ -77,7 +81,7 @@ public class Day15Part2
         {
             var data = File.ReadAllLines(@"Day15Part2/data.txt");
             var sut = new Day15Part2();
-            Assert.AreEqual(259333, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(259333));
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2022.Day01Part1;
@@ -28,7 +28,7 @@ public class Day01Part1
 
         return elves.Max();
     }
-    
+
     private class Day01Part1Tests
     {
         [Test]
@@ -36,15 +36,15 @@ public class Day01Part1
         {
             var data = File.ReadAllLines(@"Day01Part1/testdata.txt");
             var sut = new Day01Part1();
-            Assert.AreEqual(24000, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(24000));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day01Part1/data.txt");
             var sut = new Day01Part1();
-            Assert.AreEqual(69289, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(69289));
         }
     }
 }

@@ -81,14 +81,14 @@ public class Day17Part1
         public void TestData()
         {
             var sut = new Day17Part1();
-            Assert.AreEqual(45, sut.Run(20, 30, -10, -5));
+            Assert.That(sut.Run(20, 30, -10, -5), Is.EqualTo(45));
         }
-    
+
         [Test]
         public void Data()
         {
             var sut = new Day17Part1();
-            Assert.AreEqual(7626, sut.Run(211, 232, -124, -69));
+            Assert.That(sut.Run(211, 232, -124, -69), Is.EqualTo(7626));
         }
     }
 }

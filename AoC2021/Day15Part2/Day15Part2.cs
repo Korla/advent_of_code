@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day15Part2;
@@ -63,13 +63,13 @@ public class Day15Part2
             foreach (var node in unvisitedNeighbors)
             {
                 var dist = map[currentNode] + distanceToInitial[currentNode];
-                if(dist < distanceToInitial[node])
+                if (dist < distanceToInitial[node])
                 {
                     distanceToInitial[node] = dist;
                     priorityQueue.Enqueue(node, dist);
                 }
             }
-            
+
             //When we are done considering all of the unvisited neighbors of the current node, mark the current node as visited and remove it from the unvisited set. A visited node will never be checked again.
             unvisited.Remove(currentNode);
 
@@ -77,9 +77,9 @@ public class Day15Part2
             //(when planning a complete traversal; occurs when there is no connection between the initial node and remaining unvisited nodes), then stop. The algorithm has finished.
             if (currentNode == targetNode)
             {
-                return distanceToInitial[targetNode] - map[(0,0)] + map[targetNode];
+                return distanceToInitial[targetNode] - map[(0, 0)] + map[targetNode];
             }
-            
+
             //Otherwise, select the unvisited node that is marked with the smallest tentative distance, set it as the new current node, and go back to step 3.
         }
 
@@ -89,7 +89,7 @@ public class Day15Part2
     private List<(int, int)> GetNeighbors((int x, int y) i)
     {
         var (currX, currY) = i;
-        return new[] {(currX - 1, currY), (currX + 1, currY), (currX, currY - 1), (currX, currY + 1)}.ToList();
+        return new[] { (currX - 1, currY), (currX + 1, currY), (currX, currY - 1), (currX, currY + 1) }.ToList();
     }
 
     private class Tests
@@ -99,15 +99,15 @@ public class Day15Part2
         {
             var data = File.ReadAllLines(@"Day15Part2/testdata.txt");
             var sut = new Day15Part2();
-            Assert.AreEqual(315, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(315));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day15Part2/data.txt");
             var sut = new Day15Part2();
-            Assert.AreEqual(2874, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(2874));
         }
     }
 }

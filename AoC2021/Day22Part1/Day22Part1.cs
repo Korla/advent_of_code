@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day22Part1;
@@ -28,14 +28,14 @@ public class Day22Part1
                 {
                     for (var z = zMin; z <= zMax; z++)
                     {
-                        var key = (x,y,z);
-                        if(force || cuboids.ContainsKey(key))
+                        var key = (x, y, z);
+                        if (force || cuboids.ContainsKey(key))
                             cuboids[key] = isOn;
                     }
                 }
             }
         }
-        
+
         Turn(-50, 50, -50, 50, -50, 50, false, true);
         foreach (var row in data)
         {
@@ -57,15 +57,15 @@ public class Day22Part1
         {
             var data = File.ReadAllLines(@"Day22Part1/testdata.txt");
             var sut = new Day22Part1();
-            Assert.AreEqual(590784, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(590784));
         }
-        
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day22Part1/data.txt");
             var sut = new Day22Part1();
-            Assert.AreEqual(582644, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(582644));
         }
     }
 }

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -44,7 +47,7 @@ public class Day07Part2
                 {
                     handCountByCard.IncreaseOrAdd(c);
                 }
-                
+
                 handCountByCard.Remove('J', out var jokerCount);
                 var value = jokerCount == 5 ? "50000" : string.Join(
                     "",
@@ -70,7 +73,7 @@ public class Day07Part2
         {
             var data = File.ReadAllLines(@"Day07Part2/testdata.txt");
             var sut = new Day07Part2();
-            Assert.AreEqual(5905, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(5905));
         }
 
         [Test]
@@ -78,7 +81,7 @@ public class Day07Part2
         {
             var data = File.ReadAllLines(@"Day07Part2/data.txt");
             var sut = new Day07Part2();
-            Assert.AreEqual(248781813, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(248781813));
         }
     }
 }

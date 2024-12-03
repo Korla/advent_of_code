@@ -19,7 +19,7 @@ public class Day01Part1
             )
             .Count(a => a);
     }
-    
+
     private class Day01Part1Tests
     {
         [Test]
@@ -27,15 +27,15 @@ public class Day01Part1
         {
             var data = File.ReadAllLines(@"Day01Part1/testdata.txt");
             var sut = new Day01Part1();
-            Assert.AreEqual(7, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(7));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day01Part1/data.txt");
             var sut = new Day01Part1();
-            Assert.AreEqual(1446, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1446));
         }
     }
 }

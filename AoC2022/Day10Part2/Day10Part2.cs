@@ -30,8 +30,8 @@ public class Day10Part2
             var parts = row.Split(" ");
             instructions.Enqueue(
                 parts.First() == "addx"
-                    ? new Instruction {Completion = 2, Value = int.Parse(parts.Last())}
-                    : new Instruction {Completion = 1, Value = 0});
+                    ? new Instruction { Completion = 2, Value = int.Parse(parts.Last()) }
+                    : new Instruction { Completion = 1, Value = 0 });
             var current = instructions.First();
 
             var pixelToDraw = (i - 1) % 40;
@@ -47,7 +47,7 @@ public class Day10Part2
             }
         }
         LogCurrentRow();
-        
+
         void LogStartPosition(int i) =>
             Console.WriteLine($"Start cycle   {i}: begin executing addx {instructions.First().Value}");
 
@@ -73,15 +73,15 @@ public class Day10Part2
         {
             var data = File.ReadAllLines(@"Day10Part2/testdata.txt");
             var sut = new Day10Part2();
-            Assert.AreEqual(-1, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(-1));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day10Part2/data.txt");
             var sut = new Day10Part2();
-            Assert.AreEqual(-1, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(-1));
         }
     }
 }

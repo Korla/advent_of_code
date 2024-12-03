@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2023.Day12Part2;
@@ -36,19 +40,23 @@ public class Day12Part2
             return row.Any(t => t == '#') ? 0 : 1;
         }
 
-        if (row.Length < springs.Sum() + springs.Count() - 1) {
+        if (row.Length < springs.Sum() + springs.Count() - 1)
+        {
             return 0;
         }
 
-        if (row[0] == '.') {
+        if (row[0] == '.')
+        {
             return MemoizedRecCountPermutations((row[1..], springs));
         }
-        
+
         if (row[0] == '#')
         {
             var run = springs.First();
-            for (var i = 0; i < run; i++) {
-                if (row[i] == '.') {
+            for (var i = 0; i < run; i++)
+            {
+                if (row[i] == '.')
+                {
                     return 0;
                 }
             }
@@ -58,7 +66,8 @@ public class Day12Part2
                 return MemoizedRecCountPermutations(("", springs.Skip(1)));
             }
 
-            if (row[run] == '#') {
+            if (row[run] == '#')
+            {
                 return 0;
             }
 
@@ -67,7 +76,7 @@ public class Day12Part2
         return MemoizedRecCountPermutations(("#" + row[1..], springs)) +
                MemoizedRecCountPermutations(("." + row[1..], springs));
     }
-    
+
     private static Func<(string row, IEnumerable<int> springs), double> Memoize(Func<(string row, IEnumerable<int> springs), double> func)
     {
         var cache = new Dictionary<string, double>();
@@ -94,7 +103,7 @@ public class Day12Part2
         public void TestData(string line, double expected)
         {
             var sut = new Day12Part2();
-            Assert.AreEqual(expected, sut.RunLine(line));
+            Assert.That(sut.RunLine(line), Is.EqualTo(expected));
         }
 
         [Test]
@@ -102,7 +111,7 @@ public class Day12Part2
         {
             var data = File.ReadAllLines(@"Day12Part2/data.txt");
             var sut = new Day12Part2();
-            Assert.AreEqual(6792010726878, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(6792010726878));
         }
     }
 }

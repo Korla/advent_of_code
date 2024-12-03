@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
@@ -49,11 +48,11 @@ public class Day05Part2
             );
 
         data = data.Skip(j + 1).ToArray();
-        
+
         foreach (var row in data)
         {
             var instructions = Regex.Replace(row, "move |from |to ", "").Split(" ").Select(int.Parse).ToArray();
-            var itemsToMove = new Stack<char>(); 
+            var itemsToMove = new Stack<char>();
             foreach (var i in Enumerable.Range(0, instructions[0]))
             {
                 var item = stacks[instructions[1]].Pop();
@@ -76,7 +75,7 @@ public class Day05Part2
             whole = string.Join("", whole.Skip(partLength));
         }
     }
-    
+
     private class Day05Part2Tests
     {
         [Test]
@@ -84,15 +83,15 @@ public class Day05Part2
         {
             var data = File.ReadAllLines(@"Day05Part2/testdata.txt");
             var sut = new Day05Part2();
-            Assert.AreEqual("MCD", sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo("MCD"));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day05Part2/data.txt");
             var sut = new Day05Part2();
-            Assert.AreEqual("FGLQJCMBD", sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo("FGLQJCMBD"));
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2022.Day03Part1;
@@ -18,7 +18,7 @@ public class Day03Part1
             )
             .Sum(a => scores.IndexOf(a.Single()) + 1);
     }
-    
+
     private class Day03Part1Tests
     {
         [Test]
@@ -26,15 +26,15 @@ public class Day03Part1
         {
             var data = File.ReadAllLines(@"Day03Part1/testdata.txt");
             var sut = new Day03Part1();
-            Assert.AreEqual(157, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(157));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day03Part1/data.txt");
             var sut = new Day03Part1();
-            Assert.AreEqual(8240, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(8240));
         }
     }
 }

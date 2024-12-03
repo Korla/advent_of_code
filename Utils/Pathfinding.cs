@@ -22,7 +22,7 @@ public static class Pathfinding
                 var totalDist = map[currentNode].dist + distanceToInitial[currentNode];
                 distanceToInitial[node] = Math.Min(totalDist, distanceToInitial[node]);
             }
-            
+
             //When we are done considering all of the unvisited neighbors of the current node, mark the current node as visited and remove it from the unvisited set. A visited node will never be checked again.
             unvisited.Remove(currentNode);
 
@@ -32,7 +32,7 @@ public static class Pathfinding
             {
                 return distanceToInitial[targetNode] - map.First().Value.dist + map[targetNode].dist;
             }
-            
+
             //Otherwise, select the unvisited node that is marked with the smallest tentative distance, set it as the new current node, and go back to step 3.
             var nextNode = unvisited.ToDictionary(x => x, x => distanceToInitial[x]).MinBy(x => x.Value);
             currentNode = nextNode.Key;

@@ -16,6 +16,7 @@ public class Day14Part2
         {
             counts[key] += 1;
         }
+
         foreach (var _ in Enumerable.Range(0, 40))
         {
             var nextCounts = map.Keys.ToDictionary(key => key, _ => (long)0);
@@ -29,6 +30,7 @@ public class Day14Part2
 
             counts = nextCounts;
         }
+
         return CountTotal(counts, startString.Last());
     }
 
@@ -47,7 +49,7 @@ public class Day14Part2
         return data.Skip(2).Select(s => s.Split(" -> "))
             .ToDictionary(
                 c => (c.First()[0], c.First()[1]),
-                c => new [] { (c.First()[0], c.Last()[0]), (c.Last()[0], c.First()[1]) }.ToList()
+                c => new[] { (c.First()[0], c.Last()[0]), (c.Last()[0], c.First()[1]) }.ToList()
             );
     }
 
@@ -58,15 +60,15 @@ public class Day14Part2
         {
             var data = File.ReadAllLines(@"Day14Part2/testdata.txt");
             var sut = new Day14Part2();
-            Assert.AreEqual(2188189693529, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(2188189693529));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day14Part2/data.txt");
             var sut = new Day14Part2();
-            Assert.AreEqual(2432786807053, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(2432786807053));
         }
     }
 }

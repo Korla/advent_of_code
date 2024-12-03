@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -16,7 +19,7 @@ public class Day10Part2
     private static readonly Vector East = new(1, 0);
     private static readonly Vector South = new(0, 1);
     private static readonly Vector West = new(-1, 0);
-    private static readonly List<Vector> Neighbors = new() {North, East, South, West};
+    private static readonly List<Vector> Neighbors = new() { North, East, South, West };
     private static readonly Dictionary<char, List<Vector>> ValueMap = new()
     {
         {'|', new List<Vector>{ North, South }},
@@ -62,7 +65,7 @@ public class Day10Part2
         }
 
         FloodFill(expandedGrid, new Vector(0, 0), Color.Empty, Color.Filled);
-        
+
         // count only even points
         return expandedGrid
             .Count(e =>
@@ -84,7 +87,7 @@ public class Day10Part2
                 if (value == 'S')
                 {
                     start = vector;
-                } 
+                }
                 else if (ValueMap.ContainsKey(value))
                 {
                     grid.Add(vector, ValueMap[value].Select(v => v.Add(vector)).ToList());
@@ -104,7 +107,7 @@ public class Day10Part2
     private IEnumerable<Vector> GetLoop(Vector start, IReadOnlyDictionary<Vector, List<Vector>> grid)
     {
         var visited = new HashSet<Vector> { start };
-        while(true)
+        while (true)
         {
             var possibleMoves = grid[visited.Last()].Except(visited).ToList();
             if (!possibleMoves.Any())
@@ -122,11 +125,11 @@ public class Day10Part2
         var maxY = grid.Max(g => g.Key.Y);
         var pixels = new Stack<Vector>();
         pixels.Push(pt);
- 
+
         while (pixels.Count > 0)
         {
             var a = pixels.Pop();
-            if (a.X < maxX && a.X >= 0 &&  a.Y < maxY && a.Y >= 0)
+            if (a.X < maxX && a.X >= 0 && a.Y < maxY && a.Y >= 0)
             {
                 if (grid[a] == targetColor)
                 {
@@ -137,7 +140,7 @@ public class Day10Part2
                     }
                 }
             }
-        } 
+        }
     }
 
     private class Day10Part2Tests
@@ -147,7 +150,7 @@ public class Day10Part2
         {
             var data = File.ReadAllLines(@"Day10Part2/testdata.txt");
             var sut = new Day10Part2();
-            Assert.AreEqual(1, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1));
         }
 
         [Test]
@@ -155,7 +158,7 @@ public class Day10Part2
         {
             var data = File.ReadAllLines(@"Day10Part2/data.txt");
             var sut = new Day10Part2();
-            Assert.AreEqual(423, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(423));
         }
     }
 }

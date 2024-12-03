@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Utils;
+﻿namespace Utils;
 
 public record Vector(int X, int Y)
 {
@@ -44,10 +42,10 @@ public static class VectorExtensions
     public static Vector Multiply(this Vector vector, int scale) => new(vector.X * scale, vector.Y * scale);
 
     public static LongVector Add(this LongVector vector, LongVector other) =>
-        vector with {X = vector.X + other.X, Y = vector.Y + other.Y};
+        vector with { X = vector.X + other.X, Y = vector.Y + other.Y };
 
     public static Vector Subtract(this Vector vector, Vector other) => new(vector.X - other.X, vector.Y - other.Y);
-    public static double Length(this Vector vector) => Math.Sqrt(Math.Pow(Math.Abs(vector.X),2) + Math.Pow(Math.Abs(vector.Y),2));
+    public static double Length(this Vector vector) => Math.Sqrt(Math.Pow(Math.Abs(vector.X), 2) + Math.Pow(Math.Abs(vector.Y), 2));
     public static int ManhattanDistance(this Vector vector, Vector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
     public static long ManhattanDistance(this LongVector vector, LongVector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
 
@@ -58,8 +56,8 @@ public static class VectorExtensions
         var xMax = vectors.Select(v => v.X).Max();
         var yMin = vectors.Select(v => v.Y).Min();
         var yMax = vectors.Select(v => v.Y).Max();
-        var xRange = Enumerable.Range(xMin, xMax-xMin + 1).ToArray();
-        var yRange = Enumerable.Range(yMin, yMax-yMin + 1).ToArray();
+        var xRange = Enumerable.Range(xMin, xMax - xMin + 1).ToArray();
+        var yRange = Enumerable.Range(yMin, yMax - yMin + 1).ToArray();
         var xNumberLength = Math.Max(Math.Abs(xMax), Math.Abs(xMin)).ToString().Length;
         var yNumberLength = Math.Max(Math.Abs(yMax), Math.Abs(yMin)).ToString().Length;
         foreach (var i in Enumerable.Range(0, xNumberLength))

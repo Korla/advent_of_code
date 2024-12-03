@@ -1,5 +1,7 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
-using Utils;
 
 namespace AoC2023.Day05Part1;
 
@@ -29,7 +31,7 @@ public class Day05Part1
             {
                 foreach (var (target, source, count) in map)
                 {
-                    if(seed >= source && seed < source + count)
+                    if (seed >= source && seed < source + count)
                     {
                         return seed + target - source;
                     }
@@ -46,7 +48,7 @@ public class Day05Part1
         {
             var data = File.ReadAllLines(@"Day05Part1/testdata.txt");
             var sut = new Day05Part1();
-            Assert.AreEqual(35, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(35));
         }
 
         [Test]
@@ -54,7 +56,7 @@ public class Day05Part1
         {
             var data = File.ReadAllLines(@"Day05Part1/data.txt");
             var sut = new Day05Part1();
-            Assert.AreEqual(322500873, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(322500873));
         }
     }
 }

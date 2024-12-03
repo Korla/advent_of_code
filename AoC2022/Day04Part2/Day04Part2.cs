@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2022.Day04Part2;
@@ -19,7 +18,7 @@ public class Day04Part2
             )
             .Count(a => a.First().Intersect(a.Last()).Any());
     }
-    
+
     private class Day04Part2Tests
     {
         [Test]
@@ -27,15 +26,15 @@ public class Day04Part2
         {
             var data = File.ReadAllLines(@"Day04Part2/testdata.txt");
             var sut = new Day04Part2();
-            Assert.AreEqual(4, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(4));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day04Part2/data.txt");
             var sut = new Day04Part2();
-            Assert.AreEqual(911, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(911));
         }
     }
 }

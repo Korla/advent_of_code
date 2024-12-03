@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2023.Day13Part1;
@@ -26,7 +30,7 @@ public class Day13Part1
     private (int count, bool isHorizontal) GetResult(List<string> image)
     {
         var flippedImage = image
-            .SelectMany(s => s.Select((c,i) => (c, i)))
+            .SelectMany(s => s.Select((c, i) => (c, i)))
             .GroupBy(a1 => a1.i, a2 => a2.c)
             .Select(a => string.Join("", a.Select(b => b)))
             .ToList();
@@ -71,7 +75,7 @@ public class Day13Part1
         {
             var data = File.ReadAllLines(@"Day13Part1/testdata.txt");
             var sut = new Day13Part1();
-            Assert.AreEqual(405, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(405));
         }
 
         [Test]
@@ -79,7 +83,7 @@ public class Day13Part1
         {
             var data = File.ReadAllLines(@"Day13Part1/data.txt");
             var sut = new Day13Part1();
-            Assert.AreEqual(36041, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(36041));
         }
     }
 }

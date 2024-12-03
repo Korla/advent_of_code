@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using NUnit.Framework;
 using Utils;
 
 namespace AoC2023.Day03Part1;
@@ -46,7 +49,7 @@ public class Day03Part1
                 }
                 else
                 {
-                    allNumbers.Add((new List<Vector> { pos },value));
+                    allNumbers.Add((new List<Vector> { pos }, value));
                 }
 
                 lastNumberPos = pos;
@@ -70,7 +73,7 @@ public class Day03Part1
             )
             .Sum(e => int.Parse(e.Value));
     }
-    
+
     private class Day03Part1Tests
     {
         [Test]
@@ -78,15 +81,15 @@ public class Day03Part1
         {
             var data = File.ReadAllLines(@"Day03Part1/testdata.txt");
             var sut = new Day03Part1();
-            Assert.AreEqual(4361, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(4361));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day03Part1/data.txt");
             var sut = new Day03Part1();
-            Assert.AreEqual(560670, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(560670));
         }
     }
 }

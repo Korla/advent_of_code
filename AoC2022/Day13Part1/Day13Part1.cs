@@ -30,14 +30,14 @@ public class Day13Part1
 
     private static int Compare(string left, string right)
     {
-        if(string.IsNullOrEmpty(left) && string.IsNullOrEmpty(right)) return Return(0, left, right);
+        if (string.IsNullOrEmpty(left) && string.IsNullOrEmpty(right)) return Return(0, left, right);
         if (string.IsNullOrEmpty(left)) return Return(1, left, right);
         if (string.IsNullOrEmpty(right)) return Return(-1, left, right);
         var leftIsInteger = !left.Contains('[') && !left.Contains(',');
         var rightIsInteger = !right.Contains('[') && !right.Contains(',');
         if (leftIsInteger && rightIsInteger)
         {
-            return Return((int.Parse(right) - int.Parse(left)).Limit(-1,1), left, right);
+            return Return((int.Parse(right) - int.Parse(left)).Limit(-1, 1), left, right);
         }
         if (!leftIsInteger && !rightIsInteger)
         {
@@ -141,26 +141,26 @@ public class Day13Part1
         public void TestCompare(string left, string right, int expected)
         {
             var compare = Compare(left, right);
-            Assert.AreEqual(expected, compare);
+            Assert.That(compare, Is.EqualTo(expected));
         }
 
-        [TestCase("[1]", new object[] {"1"})]
-        [TestCase("[1,2]", new object[] {"1", "2"})]
-        [TestCase("[1,[2]]", new object[] {"1", "[2]"})]
-        [TestCase("[1,[2],3]", new object[] {"1", "[2]", "3"})]
-        [TestCase("[[1],[2,3,4]]", new object[] {"[1]", "[2,3,4]"})]
-        [TestCase("[]", new object[] {""})]
-        [TestCase("5,6", new object[] {"5", "6"})]
-        [TestCase("5,10", new object[] {"5", "10"})]
-        [TestCase("[[7,[[4,7],7,[2,8,2]],5,7,[[5,0,7,8,0]]],[[5]],[[0,[3,9]],8,[1,4,2],[[10,1,3,5,0],[4],[],3]],[[[6,4],[4,9,9,4]],[],[]]]", new object[] {"[7,[[4,7],7,[2,8,2]],5,7,[[5,0,7,8,0]]]", "[[5]]", "[[0,[3,9]],8,[1,4,2],[[10,1,3,5,0],[4],[],3]]", "[[[6,4],[4,9,9,4]],[],[]]"})]
+        [TestCase("[1]", new object[] { "1" })]
+        [TestCase("[1,2]", new object[] { "1", "2" })]
+        [TestCase("[1,[2]]", new object[] { "1", "[2]" })]
+        [TestCase("[1,[2],3]", new object[] { "1", "[2]", "3" })]
+        [TestCase("[[1],[2,3,4]]", new object[] { "[1]", "[2,3,4]" })]
+        [TestCase("[]", new object[] { "" })]
+        [TestCase("5,6", new object[] { "5", "6" })]
+        [TestCase("5,10", new object[] { "5", "10" })]
+        [TestCase("[[7,[[4,7],7,[2,8,2]],5,7,[[5,0,7,8,0]]],[[5]],[[0,[3,9]],8,[1,4,2],[[10,1,3,5,0],[4],[],3]],[[[6,4],[4,9,9,4]],[],[]]]", new object[] { "[7,[[4,7],7,[2,8,2]],5,7,[[5,0,7,8,0]]]", "[[5]]", "[[0,[3,9]],8,[1,4,2],[[10,1,3,5,0],[4],[],3]]", "[[[6,4],[4,9,9,4]],[],[]]" })]
         public void TestGetParts(string input, object[] expected)
         {
             var serialize = Serialize(expected);
             var strings = GetParts(input);
             var actual = Serialize(strings);
-            Assert.AreEqual(
-                serialize,
-                actual
+            Assert.That(
+                actual,
+                Is.EqualTo(serialize)
             );
         }
 
@@ -169,15 +169,15 @@ public class Day13Part1
         {
             var data = File.ReadAllLines(@"Day13Part1/testdata.txt");
             var sut = new Day13Part1();
-            Assert.AreEqual(13, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(13));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day13Part1/data.txt");
             var sut = new Day13Part1();
-            Assert.AreEqual(4809, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(4809));
         }
     }
 }

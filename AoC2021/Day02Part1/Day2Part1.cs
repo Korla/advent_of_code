@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day02Part1;
@@ -14,7 +14,7 @@ public class Day02Part1
         var (hor, vert) = values
             .Select(parts => (parts[0][0], int.Parse(parts[1])))
             .Aggregate(
-                (0,0),
+                (0, 0),
                 (prev, curr) =>
                 {
                     switch (curr.Item1)
@@ -29,7 +29,7 @@ public class Day02Part1
             );
         return hor * vert;
     }
-    
+
     private class Day02Part1Tests
     {
         [Test]
@@ -37,15 +37,15 @@ public class Day02Part1
         {
             var data = File.ReadAllLines(@"Day02Part1/testdata.txt");
             var sut = new Day02Part1();
-            Assert.AreEqual(150, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(150));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day02Part1/data.txt");
             var sut = new Day02Part1();
-            Assert.AreEqual(1690020, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1690020));
         }
     }
 }

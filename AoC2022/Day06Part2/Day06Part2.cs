@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -17,7 +17,7 @@ public class Day06Part2
             .Select((w, i) => (w, i))
             .First(a => a.w.Distinct().Count() == a.w.Count).i + windowSize;
     }
-    
+
     private class Day06Part2Tests
     {
         [TestCase("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
@@ -28,7 +28,7 @@ public class Day06Part2
         public void TestData(string input, int expected)
         {
             var sut = new Day06Part2();
-            Assert.AreEqual(expected, sut.Run(new[] {input}));
+            Assert.That(sut.Run(new[] { input }), Is.EqualTo(expected));
         }
 
         [Test]
@@ -36,7 +36,7 @@ public class Day06Part2
         {
             var data = File.ReadAllLines(@"Day06Part2/data.txt");
             var sut = new Day06Part2();
-            Assert.AreEqual(3613, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(3613));
         }
     }
 }

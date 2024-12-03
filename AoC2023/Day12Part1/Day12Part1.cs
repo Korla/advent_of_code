@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2023.Day12Part1;
@@ -30,19 +33,23 @@ public class Day12Part1
             return row.Any(t => t == '#') ? 0 : 1;
         }
 
-        if (row.Length < springs.Sum() + springs.Count() - 1) {
+        if (row.Length < springs.Sum() + springs.Count() - 1)
+        {
             return 0;
         }
 
-        if (row[0] == '.') {
+        if (row[0] == '.')
+        {
             return RecCountPermutations2(row[1..], springs);
         }
-        
+
         if (row[0] == '#')
         {
             var run = springs.First();
-            for (var i = 0; i < run; i++) {
-                if (row[i] == '.') {
+            for (var i = 0; i < run; i++)
+            {
+                if (row[i] == '.')
+                {
                     return 0;
                 }
             }
@@ -52,7 +59,8 @@ public class Day12Part1
                 return RecCountPermutations2("", springs.Skip(1));
             }
 
-            if (row[run] == '#') {
+            if (row[run] == '#')
+            {
                 return 0;
             }
 
@@ -88,7 +96,7 @@ public class Day12Part1
         public void TestData(string line, int expected)
         {
             var sut = new Day12Part1();
-            Assert.AreEqual(expected, sut.RunLine(line));
+            Assert.That(sut.RunLine(line), Is.EqualTo(expected));
         }
 
         [Test]
@@ -96,7 +104,7 @@ public class Day12Part1
         {
             var data = File.ReadAllLines(@"Day12Part1/data.txt");
             var sut = new Day12Part1();
-            Assert.AreEqual(7090, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(7090));
         }
     }
 }

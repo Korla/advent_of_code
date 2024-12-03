@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day11Part2;
@@ -11,9 +11,10 @@ public class Day11Part2
     private int Run(IList<string> data)
     {
         var colCount = data.First().Length;
-        var allDeltas = new[]{ -colCount - 1, -colCount, -colCount + 1, -1, +1, +colCount - 1, +colCount, +colCount + 1 };
-        var leftDeltas = new[]{ -colCount, -colCount + 1, +1, +colCount, +colCount + 1 };
-        var rightDeltas = new[]{ -colCount - 1, -colCount, -1, +colCount - 1, +colCount };
+        var allDeltas = new[]
+            { -colCount - 1, -colCount, -colCount + 1, -1, +1, +colCount - 1, +colCount, +colCount + 1 };
+        var leftDeltas = new[] { -colCount, -colCount + 1, +1, +colCount, +colCount + 1 };
+        var rightDeltas = new[] { -colCount - 1, -colCount, -1, +colCount - 1, +colCount };
         var board = data.SelectMany(s => s.Select(v => v - '0')).ToList();
         var gen = 0;
         while (board.Any(c => c != 0))
@@ -50,6 +51,7 @@ public class Day11Part2
                     }
                 }
             }
+
             Console.WriteLine($"Generation {gen + 1}");
             LogBoard(board, colCount);
         }
@@ -74,15 +76,15 @@ public class Day11Part2
         {
             var data = File.ReadAllLines(@"Day11Part2/testdata.txt");
             var sut = new Day11Part2();
-            Assert.AreEqual(195, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(195));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day11Part2/data.txt");
             var sut = new Day11Part2();
-            Assert.AreEqual(360, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(360));
         }
     }
 }

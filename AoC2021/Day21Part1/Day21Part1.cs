@@ -9,7 +9,7 @@ public class Day21Part1
         var score1 = 0;
         var score2 = 0;
         var i = 1;
-        while(true)
+        while (true)
         {
             current1 = (current1 + (i + 1) * 3 - 1) % 10 + 1;
             score1 += current1;
@@ -28,14 +28,14 @@ public class Day21Part1
         public void TestData()
         {
             var sut = new Day21Part1();
-            Assert.AreEqual(739785, sut.Run(4, 8));
+            Assert.That(sut.Run(4, 8), Is.EqualTo(739785));
         }
-        
+
         [Test]
         public void Data()
         {
             var sut = new Day21Part1();
-            Assert.AreEqual(757770, sut.Run(6, 8));
+            Assert.That(sut.Run(6, 8), Is.EqualTo(757770));
         }
     }
 }

@@ -20,10 +20,10 @@ public class Day02Part1
                     var isIncreasing = deltas.First() > 0;
                     return deltas.All(delta =>
                         isIncreasing ? delta.IsBetweenInclusive(1, 3) : delta.IsBetweenInclusive(-3, -1));
-                }   
+                }
             );
     }
-    
+
     private class Day02Part1Tests
     {
         [Test]
@@ -33,7 +33,7 @@ public class Day02Part1
             var sut = new Day02Part1();
             Assert.That(sut.Run(data), Is.EqualTo(2));
         }
-    
+
         [Test]
         public void Data()
         {

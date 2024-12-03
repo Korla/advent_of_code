@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -40,7 +41,7 @@ public class Day02Part2
             })
             .Sum(game => game.gameHands.Values.Multiply());
     }
-    
+
     private class Day02Part2Tests
     {
         [Test]
@@ -48,15 +49,15 @@ public class Day02Part2
         {
             var data = File.ReadAllLines(@"Day02Part2/testdata.txt");
             var sut = new Day02Part2();
-            Assert.AreEqual(2286, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(2286));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day02Part2/data.txt");
             var sut = new Day02Part2();
-            Assert.AreEqual(83707, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(83707));
         }
     }
 }

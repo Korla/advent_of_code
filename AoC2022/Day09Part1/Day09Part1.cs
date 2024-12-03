@@ -48,15 +48,15 @@ public class Day09Part1
         {
             var data = File.ReadAllLines(@"Day09Part1/testdata.txt");
             var sut = new Day09Part1();
-            Assert.AreEqual(13, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(13));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day09Part1/data.txt");
             var sut = new Day09Part1();
-            Assert.AreEqual(6098, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(6098));
         }
     }
 }

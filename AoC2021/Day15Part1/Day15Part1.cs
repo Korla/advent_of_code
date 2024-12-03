@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -19,7 +18,7 @@ public class Day15Part1
             for (var x = 0; x < data[y].Length; x++)
             {
                 var dist = data[y][x] - '0';
-                var neighbors = new[] {(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)}.ToList();
+                var neighbors = new[] { (x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1) }.ToList();
                 map.Add((x, y), (neighbors, dist));
             }
         }
@@ -36,15 +35,15 @@ public class Day15Part1
         {
             var data = File.ReadAllLines(@"Day15Part1/testdata.txt");
             var sut = new Day15Part1();
-            Assert.AreEqual(40, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(40));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day15Part1/data.txt");
             var sut = new Day15Part1();
-            Assert.AreEqual(562, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(562));
         }
     }
 }

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2023.Day15Part1;
@@ -25,7 +28,7 @@ public class Day15Part1
         }
         return sum + currentValue;
     }
-      
+
     private class Day15Part1Tests
     {
         [Test]
@@ -33,7 +36,7 @@ public class Day15Part1
         {
             var data = File.ReadAllLines(@"Day15Part1/testdata.txt");
             var sut = new Day15Part1();
-            Assert.AreEqual(1320, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1320));
         }
 
         [Test]
@@ -41,7 +44,7 @@ public class Day15Part1
         {
             var data = File.ReadAllLines(@"Day15Part1/data.txt");
             var sut = new Day15Part1();
-            Assert.AreEqual(509167, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(509167));
         }
     }
 }

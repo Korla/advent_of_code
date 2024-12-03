@@ -31,7 +31,8 @@ public class Day04Part1
                     }
                     else
                     {
-                        var boardNumbers = curr.Split(" ").Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+                        var boardNumbers = curr.Split(" ").Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse)
+                            .ToList();
                         boards.Last().AddRange(boardNumbers);
                         results.Last().AddRange(boardNumbers.Select(_ => 0));
                     }
@@ -71,14 +72,14 @@ public class Day04Part1
         return (-1, -1);
     }
 
-    private static List<int> SuccesfulColumn = new() {0, 5, 10, 15, 20};
-    private static List<int> SuccesfulRow = new() {0, 1, 2, 3, 4};
+    private static List<int> SuccesfulColumn = new() { 0, 5, 10, 15, 20 };
+    private static List<int> SuccesfulRow = new() { 0, 1, 2, 3, 4 };
 
-    private readonly List<List<int>> SuccesfulBoards = 
+    private readonly List<List<int>> SuccesfulBoards =
         Enumerable.Range(0, 5).Select((_, i) => SuccesfulColumn.Select(n => n + i).ToList())
-        .Concat(Enumerable.Range(0, 5).Select((_, i) => SuccesfulRow.Select(n => n + 5 * i).ToList()))
-        .Select(filled => Enumerable.Range(0, 25).Select((_, i) => filled.Contains(i) ? 1 : 0).ToList()).ToList();
-    
+            .Concat(Enumerable.Range(0, 5).Select((_, i) => SuccesfulRow.Select(n => n + 5 * i).ToList()))
+            .Select(filled => Enumerable.Range(0, 25).Select((_, i) => filled.Contains(i) ? 1 : 0).ToList()).ToList();
+
     private List<int> Multiply(IEnumerable<int> a, IEnumerable<int> b) => a.Zip(b, (c, d) => c * d).ToList();
     private int Sum(IEnumerable<int> a) => a.Aggregate((prev, curr) => prev + curr);
 
@@ -89,15 +90,15 @@ public class Day04Part1
         {
             var data = File.ReadAllLines(@"Day04Part1/testdata.txt");
             var sut = new Day04Part1();
-            Assert.AreEqual(4512, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(4512));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day04Part1/data.txt");
             var sut = new Day04Part1();
-            Assert.AreEqual(64084, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(64084));
         }
     }
 }

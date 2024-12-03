@@ -22,7 +22,7 @@ public class Day01Part1
         lists.Item2.Sort();
         return lists.Item1.Zip(lists.Item2, (item1, item2) => Math.Abs(item1 - item2)).Sum();
     }
-    
+
     private class Day01Part1Tests
     {
         [Test]
@@ -32,7 +32,7 @@ public class Day01Part1
             var sut = new Day01Part1();
             Assert.That(sut.Run(data), Is.EqualTo(11));
         }
-    
+
         [Test]
         public void Data()
         {

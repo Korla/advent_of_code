@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day06Part2;
@@ -37,15 +37,15 @@ public class Day06Part2
         {
             var data = File.ReadAllLines(@"Day06Part2/testdata.txt");
             var sut = new Day06Part2();
-            Assert.AreEqual(26984457539, sut.Run(data, 256));
+            Assert.That(sut.Run(data, 256), Is.EqualTo(26984457539));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day06Part2/data.txt");
             var sut = new Day06Part2();
-            Assert.AreEqual(1682576647495, sut.Run(data, 256));
+            Assert.That(sut.Run(data, 256), Is.EqualTo(1682576647495));
         }
     }
 }

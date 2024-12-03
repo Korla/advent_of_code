@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
@@ -42,7 +42,7 @@ public class Day18Part1
             var start = 1;
             var end = input.Length - 1;
             var openCount = 0;
-            for(var i = start; i < end; i++)
+            for (var i = start; i < end; i++)
             {
                 var c = input[i];
                 if (c == '[') openCount++;
@@ -89,7 +89,8 @@ public class Day18Part1
         {
             var value = int.Parse(m.Value);
             var startIndex = m.Index;
-            return new Salmon {Value = value, StartIndex = startIndex, EndIndex = startIndex + value.ToString().Length - 1};
+            return new Salmon
+            { Value = value, StartIndex = startIndex, EndIndex = startIndex + value.ToString().Length - 1 };
         }).ToList();
         var integersReversed = integers.OrderBy(v => -v.StartIndex).ToList();
         var openCount = 0;
@@ -106,8 +107,9 @@ public class Day18Part1
                 {
                     if (input[end] == ']') break;
                 }
+
                 var indexOfLeft = start + 1;
-                integers.Add(new Salmon { Value = 0, StartIndex = start, EndIndex = start});
+                integers.Add(new Salmon { Value = 0, StartIndex = start, EndIndex = start });
                 var left = integers.First(v => v.StartIndex == indexOfLeft);
                 var right = integers.First(v => v.StartIndex > indexOfLeft);
                 integers.Remove(left);
@@ -144,7 +146,7 @@ public class Day18Part1
         }).ToList();
         var target = integers.FirstOrDefault(v => v.Value > 9);
         if (target == null) return input;
-        var half = target.Value / (double) 2;
+        var half = target.Value / (double)2;
         var first = input[..target.StartIndex];
         var s = input[(target.StartIndex + 2)..];
         return $"{first}[{Math.Floor(half)},{Math.Ceiling(half)}]{s}";
@@ -166,18 +168,28 @@ public class Day18Part1
     private class Tests
     {
         [Test]
-        [TestCase("[[[[4,0],[5,4]],[[7,7],[6,0]]],[[8,[7,7]],[[7,9],[5,0]]]]", "[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]","[7,[[[3,7],[4,3]],[[6,3],[8,8]]]]")]
-        [TestCase("[[[[6,7],[6,7]],[[7,7],[0,7]]],[[[8,7],[7,7]],[[8,8],[8,0]]]]", "[[[[4,0],[5,4]],[[7,7],[6,0]]],[[8,[7,7]],[[7,9],[5,0]]]]","[[2,[[0,8],[3,4]]],[[[6,7],1],[7,[1,6]]]]")]
-        [TestCase("[[[[7,0],[7,7]],[[7,7],[7,8]]],[[[7,7],[8,8]],[[7,7],[8,7]]]]", "[[[[6,7],[6,7]],[[7,7],[0,7]]],[[[8,7],[7,7]],[[8,8],[8,0]]]]","[[[[2,4],7],[6,[0,5]]],[[[6,8],[2,8]],[[2,1],[4,5]]]]")]
-        [TestCase("[[[[7,7],[7,8]],[[9,5],[8,7]]],[[[6,8],[0,8]],[[9,9],[9,0]]]]", "[[[[7,0],[7,7]],[[7,7],[7,8]]],[[[7,7],[8,8]],[[7,7],[8,7]]]]","[7,[5,[[3,8],[1,4]]]]")]
-        [TestCase("[[[[6,6],[6,6]],[[6,0],[6,7]]],[[[7,7],[8,9]],[8,[8,1]]]]", "[[[[7,7],[7,8]],[[9,5],[8,7]]],[[[6,8],[0,8]],[[9,9],[9,0]]]]","[[2,[2,2]],[8,[8,1]]]")]
-        [TestCase("[[[[6,6],[7,7]],[[0,7],[7,7]]],[[[5,5],[5,6]],9]]", "[[[[6,6],[6,6]],[[6,0],[6,7]]],[[[7,7],[8,9]],[8,[8,1]]]]","[2,9]")]
-        [TestCase("[[[[7,8],[6,7]],[[6,8],[0,8]]],[[[7,7],[5,0]],[[5,5],[5,6]]]]", "[[[[6,6],[7,7]],[[0,7],[7,7]]],[[[5,5],[5,6]],9]]","[1,[[[9,3],9],[[9,0],[0,7]]]]")]
-        [TestCase("[[[[7,7],[7,7]],[[8,7],[8,7]]],[[[7,0],[7,7]],9]]", "[[[[7,8],[6,7]],[[6,8],[0,8]]],[[[7,7],[5,0]],[[5,5],[5,6]]]]","[[[5,[7,4]],7],1]")]
-        [TestCase("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]", "[[[[7,7],[7,7]],[[8,7],[8,7]]],[[[7,0],[7,7]],9]]","[[[[4,2],2],6],[8,7]]")]
+        [TestCase("[[[[4,0],[5,4]],[[7,7],[6,0]]],[[8,[7,7]],[[7,9],[5,0]]]]",
+            "[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]", "[7,[[[3,7],[4,3]],[[6,3],[8,8]]]]")]
+        [TestCase("[[[[6,7],[6,7]],[[7,7],[0,7]]],[[[8,7],[7,7]],[[8,8],[8,0]]]]",
+            "[[[[4,0],[5,4]],[[7,7],[6,0]]],[[8,[7,7]],[[7,9],[5,0]]]]", "[[2,[[0,8],[3,4]]],[[[6,7],1],[7,[1,6]]]]")]
+        [TestCase("[[[[7,0],[7,7]],[[7,7],[7,8]]],[[[7,7],[8,8]],[[7,7],[8,7]]]]",
+            "[[[[6,7],[6,7]],[[7,7],[0,7]]],[[[8,7],[7,7]],[[8,8],[8,0]]]]",
+            "[[[[2,4],7],[6,[0,5]]],[[[6,8],[2,8]],[[2,1],[4,5]]]]")]
+        [TestCase("[[[[7,7],[7,8]],[[9,5],[8,7]]],[[[6,8],[0,8]],[[9,9],[9,0]]]]",
+            "[[[[7,0],[7,7]],[[7,7],[7,8]]],[[[7,7],[8,8]],[[7,7],[8,7]]]]", "[7,[5,[[3,8],[1,4]]]]")]
+        [TestCase("[[[[6,6],[6,6]],[[6,0],[6,7]]],[[[7,7],[8,9]],[8,[8,1]]]]",
+            "[[[[7,7],[7,8]],[[9,5],[8,7]]],[[[6,8],[0,8]],[[9,9],[9,0]]]]", "[[2,[2,2]],[8,[8,1]]]")]
+        [TestCase("[[[[6,6],[7,7]],[[0,7],[7,7]]],[[[5,5],[5,6]],9]]",
+            "[[[[6,6],[6,6]],[[6,0],[6,7]]],[[[7,7],[8,9]],[8,[8,1]]]]", "[2,9]")]
+        [TestCase("[[[[7,8],[6,7]],[[6,8],[0,8]]],[[[7,7],[5,0]],[[5,5],[5,6]]]]",
+            "[[[[6,6],[7,7]],[[0,7],[7,7]]],[[[5,5],[5,6]],9]]", "[1,[[[9,3],9],[[9,0],[0,7]]]]")]
+        [TestCase("[[[[7,7],[7,7]],[[8,7],[8,7]]],[[[7,0],[7,7]],9]]",
+            "[[[[7,8],[6,7]],[[6,8],[0,8]]],[[[7,7],[5,0]],[[5,5],[5,6]]]]", "[[[5,[7,4]],7],1]")]
+        [TestCase("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]",
+            "[[[[7,7],[7,7]],[[8,7],[8,7]]],[[[7,0],[7,7]],9]]", "[[[[4,2],2],6],[8,7]]")]
         public void ReduceTests(string expected, string first, string second)
         {
-            Assert.AreEqual(expected, Add(first, second));
+            Assert.That(Add(first, second), Is.EqualTo(expected));
         }
 
         [Theory]
@@ -191,12 +203,13 @@ public class Day18Part1
         [TestCase("[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]", "[[3,[2,[8,0]]],[9,[5,[7,0]]]]")]
         [TestCase("[[[[0,7],4],[7,[[8,4],9]]],[1,1]]", "[[[[0,7],4],[15,[0,13]]],[1,1]]")]
         [TestCase("[[[[0,7],4],[[7,8],[0,[6,7]]]],[1,1]]", "[[[[0,7],4],[[7,8],[6,0]]],[8,1]]")]
-        [TestCase("[[[[4,0],[5,4]],[[7,0],[15,5]]],[7,[[[3,7],[4,3]],[[6,3],[8,8]]]]]", "[[[[4,0],[5,4]],[[7,0],[15,5]]],[10,[[0,[11,3]],[[6,3],[8,8]]]]]")]
+        [TestCase("[[[[4,0],[5,4]],[[7,0],[15,5]]],[7,[[[3,7],[4,3]],[[6,3],[8,8]]]]]",
+            "[[[[4,0],[5,4]],[[7,0],[15,5]]],[10,[[0,[11,3]],[[6,3],[8,8]]]]]")]
         public void ExplodeTests(string input, string expected)
         {
-            Assert.AreEqual(expected, Explode(input));
+            Assert.That(Explode(input), Is.EqualTo(expected));
         }
-        
+
         [Theory]
         [TestCase("[11,1]", "[[5,6],1]")]
         [TestCase("[11,11]", "[[5,6],11]")]
@@ -204,14 +217,14 @@ public class Day18Part1
         [TestCase("[1,[12,[1,2]]]", "[1,[[6,6],[1,2]]]")]
         public void SplitTests(string input, string expected)
         {
-            Assert.AreEqual(expected, Split(input));
+            Assert.That(Split(input), Is.EqualTo(expected));
         }
 
         [Test]
         public void SumTestData()
         {
             var data = File.ReadAllLines(@"Day18Part1/testdata.txt");
-            Assert.AreEqual("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]", Sum(data));
+            Assert.That(Sum(data), Is.EqualTo("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]"));
         }
 
         [Theory]
@@ -223,23 +236,23 @@ public class Day18Part1
         [TestCase("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]", 3488)]
         public void SumNumbers(string number, int expected)
         {
-            Assert.AreEqual(expected, new ComplexNumber(number).Sum());
+            Assert.That(new ComplexNumber(number).Sum(), Is.EqualTo(expected));
         }
-    
+
         [Test]
         public void TestData()
         {
             var data = File.ReadAllLines(@"Day18Part1/testdata2.txt");
             var sut = new Day18Part1();
-            Assert.AreEqual(4140, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(4140));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day18Part1/data.txt");
             var sut = new Day18Part1();
-            Assert.AreEqual(3675, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(3675));
         }
     }
 }

@@ -17,15 +17,15 @@ public class Day10Part1
     {
         var result = 0;
         var x = 1;
-        var salmon = new List<int> {20, 60, 100, 140, 180, 220};
+        var salmon = new List<int> { 20, 60, 100, 140, 180, 220 };
         var instructions = new Queue<Instruction>();
         data = data.Concat(Enumerable.Range(0, 100).Select(_ => "noop"));
         foreach (var (parts, i) in data.Select((row, i) => (row.Split(" "), i + 2)))
         {
             instructions.Enqueue(
                 parts.First() == "addx"
-                    ? new Instruction {Completion = 2, Value = int.Parse(parts.Last())}
-                    : new Instruction {Completion = 1, Value = 0});
+                    ? new Instruction { Completion = 2, Value = int.Parse(parts.Last()) }
+                    : new Instruction { Completion = 1, Value = 0 });
             var current = instructions.First();
             current.Completion -= 1;
             if (current.Completion == 0)
@@ -50,15 +50,15 @@ public class Day10Part1
         {
             var data = File.ReadAllLines(@"Day10Part1/testdata.txt");
             var sut = new Day10Part1();
-            Assert.AreEqual(13140, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(13140));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day10Part1/data.txt");
             var sut = new Day10Part1();
-            Assert.AreEqual(13680, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(13680));
         }
     }
 }

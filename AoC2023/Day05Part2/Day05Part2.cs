@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 using Range = Utils.Range;
@@ -33,7 +36,7 @@ public class Day05Part2
                 currentMap = new List<(Range sourceRange, double distance)>();
                 continue;
             }
-    
+
             var bounds = line.Split(" ").Select(double.Parse).ToList();
             currentMap.Add((
                 new Range(bounds[1], bounds[1] + bounds[2]),
@@ -64,7 +67,7 @@ public class Day05Part2
         var min = seeds.Min(a => a.start);
         return min;
     }
-      
+
     private class Day05Part2Tests
     {
         [Test]
@@ -72,7 +75,7 @@ public class Day05Part2
         {
             var data = File.ReadAllLines(@"Day05Part2/testdata.txt");
             var sut = new Day05Part2();
-            Assert.AreEqual(46, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(46));
         }
 
         [Test]
@@ -80,7 +83,7 @@ public class Day05Part2
         {
             var data = File.ReadAllLines(@"Day05Part2/data.txt");
             var sut = new Day05Part2();
-            Assert.AreEqual(0, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(0));
         }
     }
 }

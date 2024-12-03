@@ -9,7 +9,7 @@ public static class RangeExtensions
 
     private static Range Join(this Range r1, Range r2)
     {
-        var bounds = new List<double> {r1.start, r1.end, r2.start, r2.end}
+        var bounds = new List<double> { r1.start, r1.end, r2.start, r2.end }
             .OrderBy(a => a)
             .ToList();
         return new Range(bounds.First(), bounds.Last());
@@ -51,7 +51,7 @@ public static class RangeExtensions
             var overlaps = current.Overlaps(result.Last());
             result.Enqueue(
                 overlaps ?
-                    current.Join(result.Dequeue()) : 
+                    current.Join(result.Dequeue()) :
                     current
             );
         }
@@ -73,7 +73,7 @@ public static class RangeExtensions
     {
         return new Range(range.start + distance, range.end + distance);
     }
-      
+
     private class RangeTests
     {
         [TestCase(1, 2, 3, 4, 1, 4)]
@@ -82,15 +82,15 @@ public static class RangeExtensions
         [TestCase(2, 3, 1, 4, 1, 4)]
         public void JoinTests(double s1, double e1, double s2, double e2, double s3, double e3)
         {
-            Assert.AreEqual(new Range(s3, e3), new Range(s1, e1).Join(new Range(s2, e2)));
+            Assert.That(new Range(s1, e1).Join(new Range(s2, e2)), Is.EqualTo(new Range(s3, e3)));
         }
 
         [Test]
         public void SplitToOneTests()
         {
-            Assert.AreEqual(
-                new List<Range> { new(1, 2)},
-                new Range(1, 2).Split(new Range(3, 4))
+            Assert.That(
+                new Range(1, 2).Split(new Range(3, 4)),
+                Is.EqualTo(new List<Range> { new(1, 2) })
             );
         }
 
@@ -98,36 +98,36 @@ public static class RangeExtensions
         [TestCase(1, 3, 1, 2, 1, 2, 2, 3)]
         public void SplitToTwoTests(double s1, double e1, double s2, double e2, double s3, double e3, double s4, double e4)
         {
-            Assert.AreEqual(
-                new List<Range> { new(s3, e3), new(s4, e4)},
-                new Range(s1, e1).Split(new Range(s2, e2))
+            Assert.That(
+                new Range(s1, e1).Split(new Range(s2, e2)),
+                Is.EqualTo(new List<Range> { new(s3, e3), new(s4, e4) })
             );
         }
 
         [Test]
         public void SplitToThreeTests()
         {
-            Assert.AreEqual(
-                new List<Range> { new(1, 2), new(2, 3), new(3, 4)},
-                new Range(1, 4).Split(new Range(2, 3))
+            Assert.That(
+                new Range(1, 4).Split(new Range(2, 3)),
+                Is.EqualTo(new List<Range> { new(1, 2), new(2, 3), new(3, 4) })
             );
         }
 
         [Test]
         public void SimplifyTouchingTests()
         {
-            Assert.AreEqual(
-                new List<Range> { new(1, 4)},
-                new List<Range> { new(1, 2), new(2, 3), new(3, 4)}.Simplify()
+            Assert.That(
+                new List<Range> { new(1, 2), new(2, 3), new(3, 4) }.Simplify(),
+                Is.EqualTo(new List<Range> { new(1, 4) })
             );
         }
 
         [Test]
         public void SimplifyNoTouchTests()
         {
-            Assert.AreEqual(
-                new List<Range> { new(1, 2), new(3, 4)},
-                new List<Range> { new(1, 2), new(3, 4)}.Simplify()
+            Assert.That(
+                new List<Range> { new(1, 2), new(3, 4) }.Simplify(),
+                Is.EqualTo(new List<Range> { new(1, 2), new(3, 4) })
             );
         }
     }

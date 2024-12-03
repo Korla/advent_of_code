@@ -16,7 +16,7 @@ public class Day16Part1
         var pattern = @"Valve ([A-Z][A-Z]) has flow rate=(\d+); tunnels? leads? to valves? (,? ?([A-Z][A-Z]))*";
         var valves = data
             .Select(r => Regex.Match(r, pattern).Groups)
-            .Select(match => 
+            .Select(match =>
                 new Valve(
                     (match[1].Value[0], match[1].Value[1]),
                     int.Parse(match[2].Value),
@@ -32,7 +32,7 @@ public class Day16Part1
         var flowValves = valves.Where(v => v.FlowRate > 0).ToList();
         var mappings = new Dictionary<((char, char), (char, char)), int>();
         var start = ('A', 'A');
-        foreach (var valve in new[] {valves.Single(v => v.Id == start)}.Concat(flowValves))
+        foreach (var valve in new[] { valves.Single(v => v.Id == start) }.Concat(flowValves))
         {
             foreach (var flowValve in flowValves)
             {
@@ -69,15 +69,15 @@ public class Day16Part1
         {
             var data = File.ReadAllLines(@"Day16Part1/testdata.txt");
             var sut = new Day16Part1();
-            Assert.AreEqual(1651, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1651));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day16Part1/data.txt");
             var sut = new Day16Part1();
-            Assert.AreEqual(1584, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1584));
         }
     }
 }

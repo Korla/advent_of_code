@@ -3,8 +3,8 @@
 public class Dijkstra<T> where T : notnull
 {
     public Func<T, List<T>> neighbors;
-    public Func<T, bool> target;  
-    public Func<T, bool> valid; 
+    public Func<T, bool> target;
+    public Func<T, bool> valid;
     public Func<T, int> weight;
 
     public int Compute(T start)

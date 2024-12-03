@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
@@ -38,7 +37,7 @@ public class Day09Part2
         {
             knots.AddLast(start);
         }
-        
+
         foreach (var row in data)
         {
             var parts = row.Split(' ');
@@ -77,15 +76,15 @@ public class Day09Part2
         {
             var data = File.ReadAllLines(@"Day09Part2/testdata.txt");
             var sut = new Day09Part2();
-            Assert.AreEqual(36, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(36));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day09Part2/data.txt");
             var sut = new Day09Part2();
-            Assert.AreEqual(2597, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(2597));
         }
     }
 }

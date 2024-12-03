@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Utils;
@@ -33,7 +36,7 @@ public class Day08Part2
                 {
                     return index + 1;
                 }
-    
+
                 index++;
             }
         }
@@ -46,7 +49,7 @@ public class Day08Part2
         {
             var data = File.ReadAllLines(@"Day08Part2/testdata.txt");
             var sut = new Day08Part2();
-            Assert.AreEqual(6, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(6));
         }
 
         [Test]
@@ -54,7 +57,7 @@ public class Day08Part2
         {
             var data = File.ReadAllLines(@"Day08Part2/data.txt");
             var sut = new Day08Part2();
-            Assert.AreEqual(12357789728873, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(12357789728873));
         }
     }
 }

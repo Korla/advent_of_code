@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Utils;
 
@@ -28,7 +30,7 @@ public class Day06Part1
             })
             .Multiply();
     }
-      
+
     private class Day06Part1Tests
     {
         [Test]
@@ -37,12 +39,12 @@ public class Day06Part1
             // Time:      7  15   30
             // Distance:  9  40  200
             var sut = new Day06Part1();
-            Assert.AreEqual(288, sut.Run(new List<(int, int)>
+            Assert.That(sut.Run(new List<(int, int)>
             {
                 (7, 9),
                 (15, 40),
                 (30, 200)
-            }));
+            }), Is.EqualTo(288));
         }
 
         [Test]
@@ -51,13 +53,13 @@ public class Day06Part1
             // Time:        60     94     78     82
             // Distance:   475   2138   1015   1650
             var sut = new Day06Part1();
-            Assert.AreEqual(345015, sut.Run(new List<(int, int)>
+            Assert.That(sut.Run(new List<(int, int)>
             {
                 (60, 475),
                 (94, 2138),
                 (78, 1015),
                 (82, 1650)
-            }));
+            }), Is.EqualTo(345015));
         }
     }
 }

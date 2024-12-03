@@ -54,10 +54,10 @@ public class Day14Part1
             {
                 if (fallingSand.Y == maxY)
                 {
-                    map.Concat(new[] {source}).Print();
+                    map.Concat(new[] { source }).Print();
                     return count;
                 }
-                var fallingSandDown = fallingSand with {Y = fallingSand.Y + 1};
+                var fallingSandDown = fallingSand with { Y = fallingSand.Y + 1 };
                 if (!map.Contains(fallingSandDown))
                 {
                     fallingSand = fallingSandDown;
@@ -90,15 +90,15 @@ public class Day14Part1
         {
             var data = File.ReadAllLines(@"Day14Part1/testdata.txt");
             var sut = new Day14Part1();
-            Assert.AreEqual(24, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(24));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day14Part1/data.txt");
             var sut = new Day14Part1();
-            Assert.AreEqual(1199, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(1199));
         }
     }
 }

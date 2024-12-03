@@ -65,15 +65,15 @@ public static class EnumerableExtensions
         [Test]
         public void Pairwise()
         {
-            var data = new List<int> {1, 2, 3}.Pairwise((a,b) => (a, b));
-            Assert.AreEqual(data, new List<(int, int)> { (1,2), (2,3) });
+            var data = new List<int> { 1, 2, 3 }.Pairwise((a, b) => (a, b));
+            Assert.That(new List<(int, int)> { (1, 2), (2, 3) }, Is.EqualTo(data));
         }
 
         [Test]
         public void SlidingWindowValues()
         {
-            var data = new List<int> {1, 2, 3}.SlidingWindowValues(2);
-            Assert.AreEqual(data, new List<List<int>> {new() {1, 2}, new() {2,3}});
+            var data = new List<int> { 1, 2, 3 }.SlidingWindowValues(2);
+            Assert.That(new List<List<int>> { new() { 1, 2 }, new() { 2, 3 } }, Is.EqualTo(data));
         }
     }
 }

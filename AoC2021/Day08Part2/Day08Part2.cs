@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace AoC2021.Day08Part2;
@@ -18,7 +18,7 @@ public class Day08Part2
         6 ab defg
         6 abcd fg
         7 abcdefg
-        
+
         e 4
         b 6
         d 7
@@ -30,12 +30,12 @@ public class Day08Part2
     private int Run(IEnumerable<string> data)
     {
         return data
-            .Sum(row =>
+            .Select(row =>
             {
                 var lineParts = row.Split(" | ").Select(part => part.Split(" ")).ToList();
                 var input = lineParts.First();
                 var output = lineParts.Last();
-                
+
                 var digitCounts = input.SelectMany(d => d).GroupBy(d => d).ToList();
                 var e = digitCounts.Single(dc => dc.Count() is 4).Key;
                 var b = digitCounts.Single(dc => dc.Count() is 6).Key;
@@ -53,20 +53,23 @@ public class Day08Part2
 
                 var digits = new List<string>
                 {
-                    new(new[] {a,b,c,e,f,g}.OrderBy(a => a).ToArray()),
-                    new(new[] {c,f}.OrderBy(a => a).ToArray()),
-                    new(new[] {a,c,d,e,g}.OrderBy(a => a).ToArray()),
-                    new(new[] {a,c,d,f,g}.OrderBy(a => a).ToArray()),
-                    new(new[] {b,c,d,f}.OrderBy(a => a).ToArray()),
-                    new(new[] {a,b,d,f,g}.OrderBy(a => a).ToArray()),
-                    new(new[] {a,b,d,e,f,g}.OrderBy(a => a).ToArray()),
-                    new(new[] {a,c,f}.OrderBy(a => a).ToArray()),
-                    new(new[] {a,b,c,d,e,f,g}.OrderBy(a => a).ToArray()),
-                    new(new[] {a,b,c,d,f,g}.OrderBy(a => a).ToArray()),
+                    new(new char[] { a, b, c, e, f, g }.OrderBy(a => a).ToArray()),
+                    new(new char[] { c, f }.OrderBy(a => a).ToArray()),
+                    new(new char[] { a, c, d, e, g }.OrderBy(a => a).ToArray()),
+                    new(new char[] { a, c, d, f, g }.OrderBy(a => a).ToArray()),
+                    new(new char[] { b, c, d, f }.OrderBy(a => a).ToArray()),
+                    new(new char[] { a, b, d, f, g }.OrderBy(a => a).ToArray()),
+                    new(new char[] { a, b, d, e, f, g }.OrderBy(a => a).ToArray()),
+                    new(new char[] { a, c, f }.OrderBy(a => a).ToArray()),
+                    new(new char[] { a, b, c, d, e, f, g }.OrderBy(a => a).ToArray()),
+                    new(new char[] { a, b, c, d, f, g }.OrderBy(a => a).ToArray()),
                 };
-                var outputString = string.Join("", output.Select(digitString => digits.IndexOf(new string(digitString.ToCharArray().OrderBy(a => a).ToArray()))));
+                var outputString = string.Join("",
+                    output.Select(digitString =>
+                        digits.IndexOf(new string(digitString.ToCharArray().OrderBy(a => a).ToArray()))));
                 return int.Parse(outputString);
-            });
+            })
+            .Sum();
     }
 
     private class Tests
@@ -76,7 +79,7 @@ public class Day08Part2
         {
             var data = File.ReadAllLines(@"Day08Part2/testdata.txt");
             var sut = new Day08Part2();
-            Assert.AreEqual(61229, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(61229));
         }
 
         [Test]
@@ -84,15 +87,15 @@ public class Day08Part2
         {
             var data = File.ReadAllLines(@"Day08Part2/testdata2.txt");
             var sut = new Day08Part2();
-            Assert.AreEqual(5353, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(5353));
         }
-    
+
         [Test]
         public void Data()
         {
             var data = File.ReadAllLines(@"Day08Part2/data.txt");
             var sut = new Day08Part2();
-            Assert.AreEqual(936117, sut.Run(data));
+            Assert.That(sut.Run(data), Is.EqualTo(936117));
         }
     }
 }
