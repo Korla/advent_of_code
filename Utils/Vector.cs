@@ -7,6 +7,10 @@ public record Vector(int X, int Y)
     public static readonly Vector Right = new(1, 0);
     public static readonly Vector Down = new(0, 1);
     public static readonly Vector Left = new(-1, 0);
+    public static readonly Vector UpRight = Up.Add(Right);
+    public static readonly Vector UpLeft = Up.Add(Left);
+    public static readonly Vector DownRight = Down.Add(Right);
+    public static readonly Vector DownLeft = Down.Add(Left);
 
     public static readonly List<Vector> CardinalDirections = new()
     {
@@ -19,13 +23,13 @@ public record Vector(int X, int Y)
     public static readonly List<Vector> AllNeighbors = new()
     {
         Up,
-        Up.Add(Right),
+        UpRight,
         Right,
-        Right.Add(Down),
+        DownRight,
         Down,
-        Down.Add(Left),
+        DownLeft,
         Left,
-        Left.Add(Up)
+        UpLeft
     };
 
     public static Vector Parse(string s)
