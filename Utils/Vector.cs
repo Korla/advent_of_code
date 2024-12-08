@@ -43,6 +43,11 @@ public record Vector(int X, int Y)
             default: throw new Exception();
         }
     }
+
+    public override string ToString()
+    {
+        return $"({X},{Y})";
+    }
 }
 public record LongVector(long X, long Y);
 
