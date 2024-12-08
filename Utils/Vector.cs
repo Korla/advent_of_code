@@ -80,10 +80,10 @@ public static class VectorExtensions
         var xRange = Enumerable.Range(xMin, xMax - xMin + 1).ToArray();
         var yRange = Enumerable.Range(yMin, yMax - yMin + 1).ToArray();
         var xNumberLength = Math.Max(Math.Abs(xMax), Math.Abs(xMin)).ToString().Length;
-        var yNumberLength = Math.Max(Math.Abs(yMax), Math.Abs(yMin)).ToString().Length;
+        var yNumberMaxLength = Math.Max(Math.Abs(yMax), Math.Abs(yMin)).ToString().Length;
         foreach (var i in Enumerable.Range(0, xNumberLength))
         {
-            foreach (var i1 in Enumerable.Range(0, yNumberLength))
+            foreach (var i1 in Enumerable.Range(0, yNumberMaxLength))
             {
                 Console.Write(" ");
             }
@@ -91,14 +91,26 @@ public static class VectorExtensions
 
             foreach (var x in xRange)
             {
-                Console.Write(x.ToString()[i]);
+                var s = x.ToString();
+                if (i < s.Length)
+                {
+                    Console.Write(s[i]);
+                }
+                else
+                {
+                    Console.Write('.');
+                }
             }
             Console.WriteLine();
         }
         foreach (var y in yRange)
         {
             Console.Write(y.ToString());
-            Console.Write(" ");
+            var yNumberLength = y.ToString().Length;
+            foreach (var i in Enumerable.Range(0, yNumberMaxLength - yNumberLength + 1))
+            {
+                Console.Write(" ");
+            }
             foreach (var x in xRange)
             {
                 var vector = new Vector(x, y);
