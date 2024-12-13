@@ -64,6 +64,7 @@ public static class VectorExtensions
 
     public static LongVector Add(this LongVector vector, LongVector other) =>
         vector with { X = vector.X + other.X, Y = vector.Y + other.Y };
+    public static LongVector Multiply(this LongVector vector, int scale) => new(vector.X * scale, vector.Y * scale);
 
     public static Vector Subtract(this Vector vector, Vector other) => new(vector.X - other.X, vector.Y - other.Y);
     public static double Length(this Vector vector) => Math.Sqrt(Math.Pow(Math.Abs(vector.X), 2) + Math.Pow(Math.Abs(vector.Y), 2));
