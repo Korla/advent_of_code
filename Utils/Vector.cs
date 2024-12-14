@@ -34,6 +34,7 @@ public record Vector(int X, int Y)
     
     public static Vector operator +(Vector a, Vector b) => a.Add(b);
     public static Vector operator -(Vector a, Vector b) => a.Subtract(b);
+    public static Vector operator %(Vector a, Vector b) => a.Modulo(b);
     public static Vector operator *(Vector a, int scale) => a.Multiply(scale);
     public static Vector operator /(Vector a, int scale) => a.Divide(scale);
 
