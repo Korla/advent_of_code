@@ -31,6 +31,11 @@ public record Vector(int X, int Y)
         Left,
         UpLeft
     };
+    
+    public static Vector operator +(Vector a, Vector b) => a.Add(b);
+    public static Vector operator -(Vector a, Vector b) => a.Subtract(b);
+    public static Vector operator *(Vector a, int scale) => a.Multiply(scale);
+    public static Vector operator /(Vector a, int scale) => a.Divide(scale);
 
     public static Vector Parse(string s)
     {
@@ -60,13 +65,15 @@ public static class VectorExtensions
     }
 
     public static Vector Add(this Vector vector, Vector other) => new(vector.X + other.X, vector.Y + other.Y);
+    public static Vector Subtract(this Vector vector, Vector other) => new(vector.X - other.X, vector.Y - other.Y);
     public static Vector Multiply(this Vector vector, int scale) => new(vector.X * scale, vector.Y * scale);
+    public static Vector Divide(this Vector vector, int scale) => new(vector.X / scale, vector.Y / scale);
+    public static Vector Modulo(this Vector vector, Vector other) => new(vector.X % other.X, vector.Y % other.Y);
 
     public static LongVector Add(this LongVector vector, LongVector other) =>
         vector with { X = vector.X + other.X, Y = vector.Y + other.Y };
     public static LongVector Multiply(this LongVector vector, int scale) => new(vector.X * scale, vector.Y * scale);
 
-    public static Vector Subtract(this Vector vector, Vector other) => new(vector.X - other.X, vector.Y - other.Y);
     public static double Length(this Vector vector) => Math.Sqrt(Math.Pow(Math.Abs(vector.X), 2) + Math.Pow(Math.Abs(vector.Y), 2));
     public static int ManhattanDistance(this Vector vector, Vector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
     public static long ManhattanDistance(this LongVector vector, LongVector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
