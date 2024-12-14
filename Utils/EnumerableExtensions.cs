@@ -60,6 +60,11 @@ public static class EnumerableExtensions
             .Select(a => string.Join("", a.Select(b => b)));
     }
 
+    public static void Log(this IEnumerable<string> source)
+    {
+        Console.WriteLine(string.Join(", ", source));
+    }
+
     private class EnumerableExtensionsTests
     {
         [Test]
