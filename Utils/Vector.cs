@@ -40,15 +40,17 @@ public record Vector(int X, int Y)
 
     public static Vector Parse(string s)
     {
-        switch (s)
+        return s switch
         {
-            case "U": return Up;
-            case "R": return Right;
-            case "D": return Down;
-            case "L": return Left;
-            default: throw new Exception();
-        }
+            "U" or "^" => Up,
+            "R" or ">" => Right,
+            "D" or "v" => Down,
+            "L" or "<" => Left,
+            _ => throw new Exception()
+        };
     }
+
+    public static Vector Parse(char c) => Parse(c.ToString());
 
     public override string ToString()
     {
@@ -79,7 +81,7 @@ public static class VectorExtensions
     public static int ManhattanDistance(this Vector vector, Vector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
     public static long ManhattanDistance(this LongVector vector, LongVector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
 
-    public static void Print(this IEnumerable<Vector> vectors)
+    public static void Print(this IEnumerable<Vector> vectors, string value = "X")
     {
         vectors = vectors.ToList();
         var xMin = vectors.Select(v => v.X).Min();
@@ -123,7 +125,7 @@ public static class VectorExtensions
             foreach (var x in xRange)
             {
                 var vector = new Vector(x, y);
-                Console.Write(vectors.Any(v => v == vector) ? "X" : ".");
+                Console.Write(vectors.Any(v => v == vector) ? value : ".");
             }
             Console.WriteLine();
         }
