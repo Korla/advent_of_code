@@ -81,13 +81,17 @@ public static class VectorExtensions
     public static int ManhattanDistance(this Vector vector, Vector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
     public static long ManhattanDistance(this LongVector vector, LongVector other) => Math.Abs(vector.X - other.X) + Math.Abs(vector.Y - other.Y);
 
-    public static void Print(this IEnumerable<Vector> vectors, string value = "X")
+    public static void Print(this IEnumerable<Vector> vectors, string value = "X") {
+        Print(vectors.Select(v => (v, value)));
+    }
+
+    public static void Print(this IEnumerable<(Vector vector, string? value)> vectors)
     {
         vectors = vectors.ToList();
-        var xMin = vectors.Select(v => v.X).Min();
-        var xMax = vectors.Select(v => v.X).Max();
-        var yMin = vectors.Select(v => v.Y).Min();
-        var yMax = vectors.Select(v => v.Y).Max();
+        var xMin = vectors.Select(v => v.vector.X).Min();
+        var xMax = vectors.Select(v => v.vector.X).Max();
+        var yMin = vectors.Select(v => v.vector.Y).Min();
+        var yMax = vectors.Select(v => v.vector.Y).Max();
         var xRange = Enumerable.Range(xMin, xMax - xMin + 1).ToArray();
         var yRange = Enumerable.Range(yMin, yMax - yMin + 1).ToArray();
         var xNumberLength = Math.Max(Math.Abs(xMax), Math.Abs(xMin)).ToString().Length;
@@ -124,8 +128,8 @@ public static class VectorExtensions
             }
             foreach (var x in xRange)
             {
-                var vector = new Vector(x, y);
-                Console.Write(vectors.Any(v => v == vector) ? value : ".");
+                var vector = vectors.FirstOrDefault(v => v.vector == new Vector(x, y));
+                Console.Write(vector.value ?? ".");
             }
             Console.WriteLine();
         }
