@@ -73,12 +73,21 @@ public static class VectorExtensions
     public static Vector Divide(this Vector vector, int scale) => new(vector.X / scale, vector.Y / scale);
     public static Vector Modulo(this Vector vector, Vector other) => new(vector.X % other.X, vector.Y % other.Y);
 
-    public static Vector Rotate(this Vector vector, bool clockwise = true)
+    public static Vector Rotate(this Vector vector)
     {
-        if (vector == Vector.Up) return clockwise ? Vector.Right : Vector.Left;
-        if (vector == Vector.Right) return clockwise ? Vector.Down : Vector.Up;
-        if (vector == Vector.Down) return clockwise ? Vector.Left : Vector.Right;
-        if (vector == Vector.Left) return clockwise ? Vector.Up : Vector.Down;
+        if (vector == Vector.Up) return Vector.Right;
+        if (vector == Vector.Right) return Vector.Down;
+        if (vector == Vector.Down) return Vector.Left;
+        if (vector == Vector.Left) return Vector.Up;
+        throw new Exception("Invalid vector");
+    }
+
+    public static Vector RotateACW(this Vector vector)
+    {
+        if (vector == Vector.Up) return Vector.Left;
+        if (vector == Vector.Right) return Vector.Up;
+        if (vector == Vector.Down) return Vector.Right;
+        if (vector == Vector.Left) return Vector.Down;
         throw new Exception("Invalid vector");
     }
 
@@ -97,6 +106,13 @@ public static class VectorExtensions
     public static void Print(this IEnumerable<(Vector vector, string? value)> vectors)
     {
         vectors = vectors.ToList();
+
+        if (!vectors.Any())
+        {
+            Console.WriteLine("No elements");
+            return;
+        }
+
         var xMin = vectors.Select(v => v.vector.X).Min();
         var xMax = vectors.Select(v => v.vector.X).Max();
         var yMin = vectors.Select(v => v.vector.Y).Min();
