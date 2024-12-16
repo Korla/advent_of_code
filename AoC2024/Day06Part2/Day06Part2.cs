@@ -49,7 +49,7 @@ public class Day06Part2
             var nextPosition = currentPosition.Add(currentDirection);
             if (nextPosition == obstruction || grid.TryGetValue(nextPosition, out var nextPositionIsObstacle) && nextPositionIsObstacle)
             {
-                currentDirection = Rotate(currentDirection);
+                currentDirection = currentDirection.Rotate();
             }
             else
             {
@@ -58,15 +58,6 @@ public class Day06Part2
         }
 
         return false;
-    }
-
-    private static Vector Rotate(Vector vector)
-    {
-        if (vector == Vector.Up) return Vector.Right;
-        if (vector == Vector.Right) return Vector.Down;
-        if (vector == Vector.Down) return Vector.Left;
-        if (vector == Vector.Left) return Vector.Up;
-        throw new Exception("Invalid vector");
     }
 
     private class Day06Part2Tests

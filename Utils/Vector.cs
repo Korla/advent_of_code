@@ -73,6 +73,15 @@ public static class VectorExtensions
     public static Vector Divide(this Vector vector, int scale) => new(vector.X / scale, vector.Y / scale);
     public static Vector Modulo(this Vector vector, Vector other) => new(vector.X % other.X, vector.Y % other.Y);
 
+    public static Vector Rotate(this Vector vector, bool clockwise = true)
+    {
+        if (vector == Vector.Up) return clockwise ? Vector.Right : Vector.Left;
+        if (vector == Vector.Right) return clockwise ? Vector.Down : Vector.Up;
+        if (vector == Vector.Down) return clockwise ? Vector.Left : Vector.Right;
+        if (vector == Vector.Left) return clockwise ? Vector.Up : Vector.Down;
+        throw new Exception("Invalid vector");
+    }
+
     public static LongVector Add(this LongVector vector, LongVector other) =>
         vector with { X = vector.X + other.X, Y = vector.Y + other.Y };
     public static LongVector Multiply(this LongVector vector, int scale) => new(vector.X * scale, vector.Y * scale);
