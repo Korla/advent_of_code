@@ -3,6 +3,7 @@ using NUnit.Framework;
 namespace Utils;
 
 public record Range(double start, double end);
+
 public static class RangeExtensions
 {
     private static bool HasDistance(this Range range) => range.end - range.start != 0;
@@ -67,6 +68,11 @@ public static class RangeExtensions
     public static bool Contains(this Range range, Range other)
     {
         return range.start <= other.start && range.end >= other.end;
+    }
+
+    public static bool Contains(this Range range, double number)
+    {
+        return range.start <= number && range.end >= number;
     }
 
     public static Range Move(this Range range, double distance)
