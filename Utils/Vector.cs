@@ -121,9 +121,11 @@ public static class VectorExtensions
         var yRange = Enumerable.Range(yMin, yMax - yMin + 1).ToArray();
         var xNumberLength = Math.Max(Math.Abs(xMax), Math.Abs(xMin)).ToString().Length;
         var yNumberMaxLength = Math.Max(Math.Abs(yMax), Math.Abs(yMin)).ToString().Length;
+
+        Console.WriteLine(string.Join("", Enumerable.Range(0, xNumberLength + xMax - xMin + 2).Select(_ => "-")));
         foreach (var i in Enumerable.Range(0, xNumberLength))
         {
-            foreach (var i1 in Enumerable.Range(0, yNumberMaxLength))
+            foreach (var _ in Enumerable.Range(0, yNumberMaxLength))
             {
                 Console.Write(" ");
             }
@@ -147,7 +149,7 @@ public static class VectorExtensions
         {
             Console.Write(y.ToString());
             var yNumberLength = y.ToString().Length;
-            foreach (var i in Enumerable.Range(0, yNumberMaxLength - yNumberLength + 1))
+            foreach (var _ in Enumerable.Range(0, yNumberMaxLength - yNumberLength + 1))
             {
                 Console.Write(" ");
             }
@@ -158,7 +160,7 @@ public static class VectorExtensions
             }
             Console.WriteLine();
         }
-        Console.WriteLine("------------------------------------");
+        Console.WriteLine(string.Join("", Enumerable.Range(0, xNumberLength + xMax - xMin + 2).Select(_ => "-")));
     }
 }
 
