@@ -6,6 +6,8 @@ public record Range(double start, double end);
 
 public static class RangeExtensions
 {
+    public static double Size(this Range range) => range.end - range.start + 1;
+
     private static bool HasDistance(this Range range) => range.end - range.start != 0;
 
     private static Range Join(this Range r1, Range r2)
