@@ -45,19 +45,23 @@ public static class RangeExtensions
     public static IEnumerable<Range> Simplify(this IEnumerable<Range> ranges)
     {
         var ordered = ranges.OrderBy(r => r.start).ToList();
-        var result = new Queue<Range>();
-        result.Enqueue(ordered.First());
+        var result = new Stack<Range>();
+        result.Push(ordered.First());
         foreach (var current in ordered.Skip(1))
         {
-            var overlaps = current.Overlaps(result.Last());
-            result.Enqueue(
-                overlaps ?
-                    current.Join(result.Dequeue()) :
-                    current
-            );
+            var last = result.Pop();
+            if (current.Overlaps(last))
+            {
+                result.Push(current.Join(last));
+            }
+            else
+            {
+                result.Push(last);
+                result.Push(current);
+            }
         }
 
-        return result;
+        return result.Reverse();
     }
 
     private static bool Overlaps(this Range range, Range other)
@@ -89,6 +93,12 @@ public static class RangeExtensions
         public void JoinTests(double s1, double e1, double s2, double e2, double s3, double e3)
         {
             Assert.That(new Range(s1, e1).Join(new Range(s2, e2)), Is.EqualTo(new Range(s3, e3)));
+        }
+        [TestCase(1, 3, 3, 4, 5, 7, 1, 4, 5, 7)]
+        [TestCase(1, 3, 4, 5, 5, 7, 1, 3, 4, 7)]
+        public void Simplify(double s1, double e1, double s2, double e2, double s3, double e3, double s4, double e4, double s5, double e5)
+        {
+            Assert.That(new List<Range> { new(s1, e1), new(s2, e2), new(s3, e3) }.Simplify(), Is.EqualTo(new List<Range> { new(s4, e4), new(s5, e5) }));
         }
 
         [Test]
