@@ -5,6 +5,7 @@ namespace Utils;
 public static class EnumerableExtensions
 {
     public static int Multiply(this IEnumerable<int> source) => source.Aggregate(1, (prev, curr) => prev * curr);
+    public static long Multiply(this IEnumerable<long> source) => source.Aggregate((prev, curr) => prev * curr);
     public static int Multiply<T>(this IEnumerable<T> source, Func<T, int> func) => source.Aggregate(1, (prev, curr) => prev * func(curr));
 
     public static IEnumerable<T> Log<T>(this IEnumerable<T> source)
