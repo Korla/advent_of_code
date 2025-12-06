@@ -10,6 +10,7 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T> Log<T>(this IEnumerable<T> source)
     {
+        Console.WriteLine();
         Console.WriteLine(string.Join("\n", source.Select(e => e?.ToString())));
         return source;
     }
@@ -56,7 +57,7 @@ public static class EnumerableExtensions
     public static IEnumerable<string> Flip(this IEnumerable<string> source)
     {
         return source.Flip<char>()
-            .Select(a => string.Join("", a.Select(b => b)));
+            .Select(a => string.Join("", a));
     }
 
     public static IEnumerable<IEnumerable<T>> Flip<T>(this IEnumerable<IEnumerable<T>> source)
@@ -66,9 +67,28 @@ public static class EnumerableExtensions
             .GroupBy(a1 => a1.i, a2 => a2.c);
     }
 
-    public static void Log(this IEnumerable<string> source)
+    public static IEnumerable<string> RotateClockWise(this IEnumerable<string> s)
     {
-        Console.WriteLine(string.Join(", ", source));
+        var source = s.ToList();
+        var width = source.First().Length;
+        return source
+            .SelectMany((row, y) => row.Select((value, x) => (value, y: x, x: width - 1 - y)))
+            .OrderBy(e => e.x)
+            .GroupBy(e => e.y, e => e.value)
+            .Select(g => string.Join("", g))
+            .ToList();
+    }
+
+    public static IEnumerable<IEnumerable<T>> RotateClockWise<T>(this IEnumerable<IEnumerable<T>> s)
+    {
+        var source = s.ToList();
+        var width = source.First().Count();
+        return source
+            .SelectMany((row, y) => row.Select((value, x) => (value, y: x, x: width - 1 - y)))
+            .OrderBy(e => e.x)
+            .GroupBy(e => e.y, e => e.value)
+            .Select(g => g.ToList())
+            .ToList();
     }
 
     private class EnumerableExtensionsTests
@@ -84,6 +104,33 @@ public static class EnumerableExtensions
         public void Flip()
         {
             Assert.That(new List<string> { "12", "34" }.Flip(), Is.EqualTo(new List<string> { "13", "24" }));
+            Assert.That(new List<string> { "123", "456", "789" }.Flip(), Is.EqualTo(new List<string> { "147", "258", "369" }));
+        }
+
+        [Test]
+        public void RotateClockWise()
+        {
+            Assert.That(new List<string>
+            {
+                "123",
+                "456",
+                "789"
+            }.RotateClockWise(), Is.EqualTo(new List<string>
+            {
+                "741",
+                "852",
+                "963"
+            }));
+            Assert.That(new List<string>
+            {
+                "12",
+                "45",
+                "78"
+            }.RotateClockWise(), Is.EqualTo(new List<string>
+            {
+                "741",
+                "852"
+            }));
         }
 
         [Test]
