@@ -55,10 +55,15 @@ public static class EnumerableExtensions
 
     public static IEnumerable<string> Flip(this IEnumerable<string> source)
     {
+        return source.Flip<char>()
+            .Select(a => string.Join("", a.Select(b => b)));
+    }
+
+    public static IEnumerable<IEnumerable<T>> Flip<T>(this IEnumerable<IEnumerable<T>> source)
+    {
         return source
             .SelectMany(s => s.Select((c, i) => (c, i)))
-            .GroupBy(a1 => a1.i, a2 => a2.c)
-            .Select(a => string.Join("", a.Select(b => b)));
+            .GroupBy(a1 => a1.i, a2 => a2.c);
     }
 
     public static void Log(this IEnumerable<string> source)
@@ -73,6 +78,12 @@ public static class EnumerableExtensions
         {
             var data = new List<int> { 1, 2, 3 }.Pairwise((a, b) => (a, b));
             Assert.That(new List<(int, int)> { (1, 2), (2, 3) }, Is.EqualTo(data));
+        }
+
+        [Test]
+        public void Flip()
+        {
+            Assert.That(new List<string> { "12", "34" }.Flip(), Is.EqualTo(new List<string> { "13", "24" }));
         }
 
         [Test]
