@@ -54,6 +54,18 @@ public static class EnumerableExtensions
             yield return resultSelector(previous, previous = it.Current);
     }
 
+    public static IEnumerable<(TSource, TSource)> AllPairs<TSource>(this IEnumerable<TSource> source)
+    {
+        var sourceList = source.ToList();
+        for (var i = 0; i < sourceList.Count - 1; i++)
+        {
+            for (var j = i + 1; j < sourceList.Count; j++)
+            {
+                yield return (sourceList[i], sourceList[j]);
+            }
+        }
+    }
+
     public static IEnumerable<string> Flip(this IEnumerable<string> source)
     {
         return source.Flip<char>()
